@@ -1,0 +1,25 @@
+<h2 class="display-6 text-primary">
+記事一覧</h2>
+		<div id="side">
+		●カテゴリー
+		<% @categories.all.each do |category| %>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/article_edits/category/<%= category.id %>"><%= category.name %></a></p>
+		<% end %>
+		</div>
+<p>※投稿記事の一覧</p>
+<p><% @account %></p>
+<p><% @msg %></p>
+<table>
+	<tr>
+		<th>ID</th><th >タイトル</th><th>投稿者</th><th>カテゴリー</th><th colspan="2"></th>
+	</tr>
+	<% @data.each do |obj| %>
+	<tr>
+		<td><%= obj.id %></td>
+		<td><%= obj.title %></td>
+		<td><%= obj.category.name %></td>
+		<td><a href="/article_edits/<%= obj.id %>">編集</a></td>
+		<td><a href="/article_edits/delete/<%= obj.id %>">削除</a></td>
+	</tr>
+	<% end %>
+</table>

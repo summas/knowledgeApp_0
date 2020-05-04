@@ -1,0 +1,6 @@
+<h3 class="show_title"><%= @article.title %></h3>
+<p class="show_read">投稿者：<%= @article.title + '　カテゴリー：[' + @article.category.name + ']' %></p>
+<%= @article.content %>
+
+<p class="show_created"><%= @article.created_at.strftime(" %Y.%m.%d %a %H:%M:%S") %></p>
+<p><a href="/articles/">戻る</a></p>

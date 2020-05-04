@@ -1,0 +1,9 @@
+<h2>※「<%= @category.name %>」の投稿</h2>
+<% @data.each do |obj| %>
+	<h3 class="top_title"><a href="/articles/show/<%= obj.id %>"><%= obj.title %></a></h3>
+	<p class="top_read"><%= obj.read %><span class="created">(<%= obj.created_at %>)</span></p>
+	<hr>
+<% end %>
+<div class="navigate">
+<div><%= paginate @data %></div>
+</div>

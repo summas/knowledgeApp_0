@@ -1,0 +1,18 @@
+<h3 class="display-6 text-primary">
+記事一覧</h3>
+<hr>
+		<div id="side">
+		●カテゴリー
+		<% @categories.all.each do |category| %>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/articles/index/<%= category.id %>"><%= category.name %></a></p>
+		<% end %>
+		</div>
+
+	<% @data.each do |obj| %>
+	<h3><a href="/articles/show/<%= obj.id %>"><%= obj.title %></a></h3>
+	<p><span class="top_created"><%= obj.created_at.strftime(" %Y.%m.%d %a %H:%M") %></span></p>
+	<hr>
+	<% end %>
+<div class="navigate">
+<div><%= paginate @data %></div>
+</div>

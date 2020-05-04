@@ -1,0 +1,2 @@
+class DisclosureRange < ApplicationRecord
+end

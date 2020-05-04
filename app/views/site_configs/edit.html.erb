@@ -1,0 +1,24 @@
+<h1 class="display-4 text-primary">
+article_config#edit</h1>
+<p>※設定の編集</p>
+<% if @articleconfig.errors.any? %>
+<ul>
+	<% @articleconfig.errors.full_messages.each do |err| %>
+		<li><%= err %></li>
+	<% end %>
+</ul>
+<% end %>
+<%= form_for(@articleconfig, url:{controller:'site_configs', action:'edit'}) do |form| %>
+<table>
+	<tr><th>タイトル</th>
+		<td><%= form.text_field :title %></td></tr>
+	<tr><th>サブタイトル</th>
+		<td><%= form.text_field :subtitle %></td></tr>
+	<tr><th>スタイル</th>
+		<td><%= form.text_field :style %></td></tr>
+	<tr><th></th>
+<td><%= form.submit "更新" %></td></tr>
+</table>
+
+	<% end %>
+<p><a href="/site_configs/index">戻る</a></p>

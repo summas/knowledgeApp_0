@@ -1,0 +1,2 @@
+module ArticleEditsHelper
+end
