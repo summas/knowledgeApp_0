@@ -10,7 +10,7 @@
 
 	<% @data.each do |obj| %>
 	<h3><a href="/articles/show/<%= obj.id %>"><%= obj.title %></a></h3>
-	<p><span class="top_created"><%= obj.created_at.strftime(" %Y.%m.%d %a %H:%M") %></span></p>
+	<p>投稿者：<%= obj.account.name %>／公開範囲：<%= obj.disclosureRange.name %>／グループ：<%= obj.group.name %>／<span class="top_created"><%= obj.created_at.strftime(" %Y.%m.%d %a %H:%M") %></span></p>
 	<hr>
 	<% end %>
 <div class="navigate">

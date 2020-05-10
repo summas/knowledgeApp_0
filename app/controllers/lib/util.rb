@@ -8,4 +8,12 @@ class Util
     matrix
   end
 
+  def get_group_hash(groups)
+    matrix = {}
+    groups.each do |group|
+     # matrix.[group.id.to_s] = group.name
+     matrix.store(group.id.to_s, group.name)
+    end
+    matrix
+  end
 end
