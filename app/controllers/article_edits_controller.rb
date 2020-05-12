@@ -11,6 +11,12 @@ class ArticleEditsController < ApplicationController
   def add
     @util = Util.new
     @article = Article.new
+    @groups = Group.all
+    @disclosureRanges = DisclosureRange.all
+  #  @groups = Group.where(id:params[:id])
+   # @groups = Group.findparams[:id])
+    puts "コメント"
+    puts @groups
     if request.post? then
       @article = Article.create articles_params
       redirect_to '/articles/index'
@@ -20,6 +26,8 @@ class ArticleEditsController < ApplicationController
   def edit
     @util = Util.new
     @article = Article.find params[:id]
+    @groups = Group.all
+    @disclosureRanges = DisclosureRange.all
     if request.patch? then
       @article.update articles_params
       redirect_to '/articles'
@@ -49,6 +57,6 @@ class ArticleEditsController < ApplicationController
 
   private
   def articles_params
-    params.require(:article).permit(:title, :content, :category_id)
+    params.require(:article).permit(:title, :content, :category_id, :group_id, :account_id, :disclosureRange_id)
   end
 end

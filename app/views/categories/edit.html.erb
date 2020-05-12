@@ -8,13 +8,13 @@ Categories#edit</h1>
 	<% end %>
 </ul>
 <% end %>
-	<%= form_for(@category, url:{controller:'categories', action:'edit'}) do |form| %>
+<%= form_for(@category, url:{controller:'categories', action:'edit'}) do |form| %>
 <table>
     <div class="form-group">
     <label for="name">カテゴリ名</label>
 		<td><%= form.text_field :name, {class:"form-control"} %>
 	</div>
-
 </table>
 <%= form.submit "更新" %>
 <% end %>
+<p><a href="/categories/">カテゴリ一覧</a></p>

@@ -1,0 +1,14 @@
+<h1 class="display-4 text-primary">
+グループの登録</h1>
+<p>※グループの登録</p>
+
+<%= form_for(@group, url:{controller:'groups', action:'add'}) do |form| %>
+<table>
+    <div class="form-group">
+    <label for="name">グループ名</label>
+		<td><%= form.text_field :name, {class:"form-control"} %>
+	</div>
+
+</table>
+<%= form.submit "登録" %>
+	<% end %>

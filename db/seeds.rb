@@ -7,3 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 SiteConfig.create(id:1, title:'ナレッジサイト', subtitle:'情報共有システム', style:'gray')
 Category.create(id:1, name:'技術情報')
+DisclosureRange.create(id:1, name:'外部公開')
+DisclosureRange.create(id:2, name:'社外秘')
+DisclosureRange.create(id:3, name:'管理者のみ')
