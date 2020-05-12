@@ -3,11 +3,26 @@ Rails.application.routes.draw do
   devise_for :accounts
   root 'articles#index'
 
+  get 'group_edits/index'
+  get 'group_edits/index/:id', to: 'group_edits#index'
+  get 'group_edits/add'
+  post 'group_edits/add'
+  get 'group_edits/edit/:id', to: 'group_edits#edit'
+  
+  delete 'group_edits/delete/:id', to: 'group_edits#delete'
+
   get 'admins/menu'
   get 'admins/index'
   get 'admins/add'
+  post 'admins/add'
   get 'admins/edit'
+  get 'admins/group_add'
+  post 'admins/group_add'
+  get 'admins/groupEdit/:id', to: 'admins#group_edit'
+  get 'admins/edit/:id', to: 'admins#edit'
+  patch 'admins/edit/:id', to: 'admins#edit'
   get 'admins/delete'
+  delete 'admins/delete/:id', to: 'admins#delete'
 
   get 'articles', to: 'articles#index'
   get 'articles/index'
@@ -44,6 +59,14 @@ Rails.application.routes.draw do
   get 'site_configs' , to: 'site_configs#index'
   get 'site_configs/edit'
   patch 'site_configs/edit'
+
+  get 'groups/index'
+  get 'groups', to: 'groups#index'
+  get 'groups/add'
+  post 'groups/add'
+  get 'groups/edit/:id', to: 'groups#edit'
+  patch 'groups/edit/:id', to: 'groups#edit'
+  delete 'groups/delete/:id', to: 'groups#delete'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

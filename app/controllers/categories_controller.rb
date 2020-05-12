@@ -33,7 +33,6 @@ class CategoriesController < ApplicationController
     @account = current_account
     @articleconfig = SiteConfig.find 1
     @categories = Category.all
-    @account = current_account
   end
 
   private

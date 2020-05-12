@@ -1,26 +1,33 @@
-<h1>管理画面</h1>
+<h2>管理画面</h2>
 
 <table>
     <tr>
         <td>○リンク</td>
     </tr>
-    <tr>
-        <td><a href="/accounts/sign_up/">アカウント登録</a></td>
-    </tr>
-    <tr>
-        <td><a href="/accounts/edit/">アカウント情報変更</a></td>
-    </tr>
+    <% if !(@account.auth == "1") then%>
     <tr>
         <td><a href="/article_edits/add">投稿</a></td>
     </tr>
     <tr>
         <td><a href="/article_edits/index">編集</a></td>
-    </tr>   
+    </tr>
+    <% end %>
+    <% if @account.auth == "9" then%>
+    <tr>
+        <td><a href="/admins/index/">他のアカウント管理</a></td>
+    </tr>
     <tr>
         <td><a href="/categories/">カテゴリー管理</a></td>
     </tr>
     <tr>
-        <td><a href="/site_configs/">ブログ設定</a></td>
+        <td><a href="/groups/index">グループ管理</a></td>
+    </tr>
+    <tr>
+        <td><a href="/site_configs/">サイト設定</a></td>
+    </tr>
+    <% end %>
+    <tr>
+        <td><a href="/accounts/edit/">アカウント情報変更</a></td>
     </tr>
 </table>
 <br>

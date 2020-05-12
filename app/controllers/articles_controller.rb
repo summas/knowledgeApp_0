@@ -1,17 +1,36 @@
 class ArticlesController < ApplicationController
   layout 'article'
- # before_action :authenticate_account!, only:[:add,:edit,:delete,:edit]
+  before_action :authenticate_account!, only:[:add,:edit,:delete,:edit]
   before_action :setLayout
 
   def index
-    if !params[:id] then
-      @data = Article.order('created_at desc')
-      .page params[:page]
+    disclosureRanges = 1
+    if account_signed_in? then
+      if current_account.auth == '9' then
+        disclosureRanges = DisclosureRange.pluck("id")
+      else
+        disclosureRanges = DisclosureRange.where.not('id = ?', 3).pluck("id")                           
+      end
+      groups = GroupRelation.where(account_id:current_account.id).pluck("group_id") 
     else
-      @category = Category.find params[:id]
-      @data = Article.where('category_id = ?', params[:id])
-      .order('created_at desc')
-      .page params[:page]
+      groups = Group.all.pluck("id") 
+    end
+
+    if !params[:id] then
+      @data = Article.where(disclosureRange_id: disclosureRanges)
+                     .where(group_id: groups)
+                     .order('created_at desc')
+                     .page params[:page]
+    else
+  #    @category = Category.find params[:id]
+      @data = Article.where(disclosureRange_id: disclosureRanges)
+                    .where(group_id: groups)
+                    .where('category_id = ?', params[:id])
+                    .order('created_at desc')
+                    .page params[:page]
+ #     @data = Article.where('category_id = ?', params[:id])
+#      .order('created_at desc')
+ #     .page params[:page]
     end
   end
 
@@ -47,7 +66,6 @@ class ArticlesController < ApplicationController
     @account = current_account
     @articleconfig = SiteConfig.find 1
     @categories = Category.all
-    @account = current_account
   end
 
   private

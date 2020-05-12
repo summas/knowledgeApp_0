@@ -1,0 +1,14 @@
+<h1 class="display-4 text-primary">
+Articles#edit</h1>
+<% @groupRelation.each do |obj| %>
+<table>
+	<td><%= obj.group_id %></td>
+	<td><%= obj.account_id %></td>
+	<td><a href="/admins/groupEdit/<%= obj.id %>">グループ編集</a></td>
+	<td><a href="/admins/edit/<%= obj.id %>">編集</a></td>
+	<td><%= link_to "削除", "/admins/delete/#{obj.id}", method: :delete, data: {confirm: "本当にこのアカウントを削除しますか？"} %></td>
+</table>
+<% end %>
+
+<p><a href="/admins/group_add">新規追加</a></p>
+<p><a href="/admins/menu">戻る</a></p>
