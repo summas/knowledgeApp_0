@@ -10,8 +10,8 @@ Articles#edit</h1>
 <% end %>
 </table>
 </div>
+<%= form_for(@article, url:{controller:'article_edits', action:'edit'}) do |form| %>
 <table>
-	<%= form_for(@article, url:{controller:'article_edits', action:'edit'}) do |form| %>
 　　<div class="form-group">
 	  <label for="title">タイトル</label>
       <%= form.text_field :title, {class:"form-control"} %>
@@ -22,11 +22,17 @@ Articles#edit</h1>
 	</div>
 	<div class="form-group">
 	  <label for="category_id">カテゴリー：</label>
-	  <%= form.select :category_id, @util.get_category_hash(@categories) %> 
+	  <%= form.select :category_id, @util.get_model_hash(@categories) %> 
 	</div>
-	<%= form.submit "送信" %>
-	<% end %>
+	<div class="form-group">
+	  <label for="group_id">グループ:</label>
+	  <%= form.select :group_id, @util.get_model_hash(@groups)%> 
+	</div>
+	<div class="form-group">
+	  <label for="disclosureRange_id">公開範囲:</label>
+	  <%= form.select :disclosureRange_id, @util.get_model_hash(@disclosureRanges)%> 
+	</div>
 </table>
-<a href="/admins/menu/">管理画面</a>
-<hr>
-<div><%= button_to "Sign out&gt;&gt;".html_safe, destroy_account_session_path, method: :delete %></div>
+<%= form.submit "更新" %>
+<% end %>
+<p><a href="/article_edits/index">戻る</a></p>

@@ -33,5 +33,6 @@ yarn-debug.log*
 .Dockerfile.swp
 docker-compose.yml
 Dockerfile
-
+.rubocop*
 knwldg.code-workspace
+.rubocop_todo.yml

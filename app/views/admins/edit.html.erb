@@ -1,2 +1,48 @@
-<h1>Admins#edit</h1>
-<p>Find me in app/views/admins/edit.html.erb</p>
+<h2>編集</h2>
+<p>※「<%= @editAccount.name %>」の編集</p>
+<% if @editAccount.errors.any? %>
+<ul>
+	<% @editAccount.errors.full_messages.each do |err| %>
+		<li><%= err %></li>
+	<% end %>
+</ul>
+<% end %>
+	<%= form_for(@editAccount, url:{controller:'admins', action:'edit'}) do |form| %>
+<table>
+　　<div class="form-group">
+	  <label for="name">名前</label>
+      <%= form.text_field :name, {class:"form-control"} %>
+	</div>
+	<div class="form-group">
+	  <label for="organization">所属組織</label>
+	  <%= form.text_field :organization, {class:"form-control"} %>
+	</div>
+	<div class="form-group">
+	  <label for="auth">権限</label>
+	  <%= form.select :auth, [['閲覧のみ', '1'], ['閲覧、編集', '3'], ['管理者', '9']] %> 
+	</div>
+    <div class="form-group">
+	  <label for="email">Eメールアドレス</label>
+	  <%= form.email_field :email, {class:"form-control"} %>
+	</div>
+    <div class="form-group">
+	  <label for="password">新パスワード</label>
+	  <%= form.password_field :password, {class:"form-control"} %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %>桁以上</em>
+    <% end %>
+  　</div>
+
+    <div class="form-group">
+	  <label for="password_confirmation">新パスワード</label>
+	  <%= form.password_field :password_confirmation, {class:"form-control"} %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %>桁以上</em>
+    <% end %>
+  　</div>
+	<%= form.submit "送信" %>
+</table>
+	<% end %>
+<p><a href="/admins/index">戻る</a></p>
