@@ -1,0 +1,21 @@
+<h1 class="display-4 text-primary">
+Groups#edit</h1>
+<p>※「<%= @group.name %>」グループの編集</p>
+<% if @group.errors.any? %>
+<ul>
+	<% @group.errors.full_messages.each do |err| %>
+		<li><%= err %></li>
+	<% end %>
+</ul>
+<% end %>
+	<%= form_for(@group, url:{controller:'groups', action:'edit'}) do |form| %>
+<table>
+    <div class="form-group">
+    <label for="name">グループ名</label>
+		<td><%= form.text_field :name, {class:"form-control"} %>
+	</div>
+
+</table>
+<%= form.submit "更新" %>
+<% end %>
+<p><a href="/groups/">戻る</a></p>
