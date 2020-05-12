@@ -8,19 +8,18 @@ groupRelation#index</h1>
 <% @groupRelation.each do |obj| %>
 <tr>
 	<td><%= obj.group_id %></td>
-    <td><%= @groups[obj.group_id.to_s] %></td>
-	<td><%= link_to "削除", "/group_edits/delete/#{obj.id}", method: :delete, data: {confirm: "本当にこのアカウントを削除しますか？"} %></td>
+	<td><%= obj.group.name %></td>
+	<td><%= link_to "削除", "/group_edits/delete/#{obj.id}", method: :delete, data: {confirm: "グループ『#{obj.group.name}』を削除しますか？"} %></td>
 </tr>
 <% end %>
 </table>
-<p><a href="/article_edits/group_add">新規追加</a></p>
 
 <%= form_for(@groupRelationAdd, url:{controller:'group_edits', action:'add'}) do |form| %>
 <table>
 　  <td>
     <div class="form-group">
-	  <label for="group_id">グループ</label>
-	  <%= form.select :group_id, [['閲覧のみ', '1'], ['閲覧、編集', '2'], ['管理者', '3']] %>
+	  <label for="group_id">追加可能なグループ</label><br>
+	  <%= form.select :group_id, @addGroups %>
 	</div></td>
 	<td><div class="form-group">
 	  <%= form.hidden_field :account_id , value: params[:id]  %>

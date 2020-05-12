@@ -4,20 +4,18 @@ class GroupEditsController < ApplicationController
 
   def index
     @util = Util.new
-    groupIds = GroupRelation.where('account_id = ?', params[:id]).pluck("group_id")
-   # @groups = @util.get_group_hash(Group.all)
-   @groups = Group.where(id:groupIds)
     @accountName = Account.select('name').find(params[:id])
-    @groupRelation = GroupRelation.where('account_id = ?', params[:id]).order('group_id')
-    
+    @groupRelation = GroupRelation.select('id','group_id').where('account_id = ?', params[:id]).order('group_id')
+    groupIds = GroupRelation.where('account_id = ?', params[:id]).pluck("group_id")
+    @addGroups = @util.get_model_hash(Group.where.not(id:groupIds))
     @groupRelationAdd = GroupRelation.new
   end
 
   def add
-    @groupRelation = GroupRelation.new
+ #   @groupRelation = GroupRelation.new
     if request.post? then
       @groupRelation = GroupRelation.create group_params
-      redirect_to '/group_edits/index/#{params[:id]}'
+      redirect_to '/group_edits/index/1' #+ params[:account_id]
     end
   end
 
@@ -37,7 +35,7 @@ class GroupEditsController < ApplicationController
   def delete
     @groupRelation = GroupRelation.find params[:id]
     @groupRelation.destroy
-    redirect_to '/admins/index'
+    redirect_to '/group_edits/index/' + @groupRelation.account_id.to_s
   end
 
   def setLayout

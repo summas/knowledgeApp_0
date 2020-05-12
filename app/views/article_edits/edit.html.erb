@@ -22,15 +22,15 @@ Articles#edit</h1>
 	</div>
 	<div class="form-group">
 	  <label for="category_id">カテゴリー：</label>
-	  <%= form.select :category_id, @util.get_category_hash(@categories) %> 
+	  <%= form.select :category_id, @util.get_model_hash(@categories) %> 
 	</div>
 	<div class="form-group">
 	  <label for="group_id">グループ:</label>
-	  <%= form.select :group_id, @util.get_category_hash(@groups)%> 
+	  <%= form.select :group_id, @util.get_model_hash(@groups)%> 
 	</div>
 	<div class="form-group">
 	  <label for="disclosureRange_id">公開範囲:</label>
-	  <%= form.select :disclosureRange_id, @util.get_category_hash(@disclosureRanges)%> 
+	  <%= form.select :disclosureRange_id, @util.get_model_hash(@disclosureRanges)%> 
 	</div>
 </table>
 <%= form.submit "更新" %>
