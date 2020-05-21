@@ -22,15 +22,11 @@ class ArticlesController < ApplicationController
                      .order('created_at desc')
                      .page params[:page]
     else
-  #    @category = Category.find params[:id]
       @data = Article.where(disclosureRange_id: disclosureRanges)
                     .where(group_id: groups)
                     .where('category_id = ?', params[:id])
                     .order('created_at desc')
                     .page params[:page]
- #     @data = Article.where('category_id = ?', params[:id])
-#      .order('created_at desc')
- #     .page params[:page]
     end
   end
 

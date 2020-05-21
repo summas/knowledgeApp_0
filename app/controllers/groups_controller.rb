@@ -24,8 +24,10 @@ class GroupsController < ApplicationController
 
   def delete
     @group = Group.find params[:id]
-    @group.destroy
-    Article.where(group_id: params[:id]).update(group_id: '０')
+    ActiveRecord::Base.transaction do
+      @group.destroy
+      Article.where(group_id: params[:id]).update(group_id: '０')
+    end
     redirect_to '/groups'
   end
 
