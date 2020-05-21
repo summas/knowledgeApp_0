@@ -61,3 +61,11 @@ gem 'devise'
 gem 'rubocop'
 
 gem 'kaminari'
+
+gem 'carrierwave'
+
+gem 'mini_magick'
+
+#Bootstrap4
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'

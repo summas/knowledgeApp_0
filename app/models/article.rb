@@ -5,4 +5,5 @@ class Article < ApplicationRecord
     belongs_to :disclosureRange
     has_rich_text :content
     paginates_per 5
+    mount_uploader :image, ImageUploader
 end
