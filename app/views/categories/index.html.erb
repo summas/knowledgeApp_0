@@ -3,17 +3,16 @@
 <p>※カテゴリーの一覧</p>
 <table>
 	<tr>
-		<th>Id</th><th>カテゴリ名</th><th>カテゴリ名</th><th>カテゴリ名</th>
+		<th>Id</th><th>カテゴリ名</th><th></th><th></th>
 	</tr>
 	<% @data.each do |obj| %>
 	<tr>
 		<td><%= obj.id %></td>
 		<td><%= obj.name %></td>
 		<td><a href="/categories/edit/<%= obj.id %>">編集</a></td>
-		<td><a href="/categories/delete/<%= obj.id %>" class="alert-link">削除</a></td>
 		<td><%= link_to "削除", "/categories/delete/#{obj.id}", method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
 	</tr>
 	<% end %>
 </table>
 <p><a href="/categories/add">新規作成＞＞</a></p>
-<p><a href="/">記事一覧</a></p>
+<p><a href="/admins/menu">戻る</a></p>
