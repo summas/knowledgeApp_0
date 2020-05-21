@@ -3,7 +3,10 @@
 	<head>
 		<title>ナレッジサイト</title>
 		<%= csrf_meta_tags %>
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 		<%= stylesheet_link_tag 'articles', media: 'all', 
 			'data-turbolinks-track': 'reload' %>
@@ -13,24 +16,45 @@
 			'data-turbolinks-track': 'reload' %>
 	</head>
 
-	<body class="container">
-		<header id="header">
-	    <div id="side">
-		<% if account_signed_in? %>
-		<p><%= @account.name %></p>
-		<% end %>
-		●メニュー<br>
-		<% if !account_signed_in? %>
-		    <a href="/accounts/sign_in/">ログイン</a><br>
-		<% else %>
-		    <a href="/admins/menu/">管理画面</a>
-		    <div><%= button_to "Sign out&gt;&gt;".html_safe, destroy_account_session_path, method: :delete %></div>			
-		<% end %>
-		</div>
-			<h1><a href="/"><%= @articleconfig.title %></a></h1>
-			<h2><%= @articleconfig.subtitle %></h2>
-		</header>
-		<hr>
+	<body class="container" style="background:#f8f8ff;">
+		<nav class="navbar navbar-dark bg-dark navbar-expand-lg mb-4">
+			<a class="navbar-brand" href="/"><%= @articleconfig.title %></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav mr-auto">
+				</ul>
+				<ul class="navbar-nav justify-content-end">
+					<% if account_signed_in? %>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle pt-3 pr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">管理メニュー</a>
+						<div class="dropdown-menu" style="background:#f8f8ff;">
+							<a class="dropdown-item" href="/article_edits/add">新規投稿</a>			
+							<a class="dropdown-item" href="/admins/menu">管理画面</a>
+								<div class="dropdown-divider"></div>
+							<a class="dropdown-item btn btn-secondary" rel="nofollow" data-method="delete" href="/accounts/sign_out">ログアウト</a>
+						</div>
+					</li>
+					<li class="nav-item pr-3">
+						<%= image_tag @account.aicon_url(:aicon), class: 'rounded-circle' if @account.aicon.present? %>
+					</li>
+					<% end %>
+					<span class="navbar-text">
+						<% if !account_signed_in? %>
+							<li class="nav-item">
+								<a href="/accounts/sign_in" class="btn btn-secondary">ログイン</a>
+							</li>
+						<% end %>
+					</span>
+				</ul>
+			</div>
+		</nav>
+			<% if account_signed_in? %>
+				<div class="float-right text-secondary h6">
+					ログインアカウント：<%= @account.name %>
+				</div>
+			<% end %>
 		<%= yield %>
 	  <div class="mt-5 text-center small text-scondary border-top border-scondary">
         2020 ナレッジサイト
