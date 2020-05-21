@@ -1,6 +1,10 @@
-<h3 class="show_title"><%= @article.title %></h3>
-<p class="show_read">投稿者：<%= @article.account.name + '　カテゴリー：[' + @article.category.name + ']'+ '　グループ：[' + @article.group.name + ']'  + '　＜' + @article.disclosureRange.name + '＞'%></p>
+
+<div class="container" style="background:#FFFFFF;">
+<h2 class="show_title pt-3"><%= @article.title %></h2>
+<p class="show_read float-left text-secondary h6 pr-3">投稿者：<%= @article.account.name + '　カテゴリー：[' + @article.category.name + ']'+ '　グループ：[' + @article.group.name + ']'  + '　＜' + @article.disclosureRange.name + '＞'%></p><br>
+<span class="show_created float-right text-secondary h6 pr-3"><%= @article.created_at.strftime(" %Y.%m.%d %a %H:%M:%S") %></span><br>
+
 <%= @article.content %>
 
-<p class="show_created"><%= @article.created_at.strftime(" %Y.%m.%d %a %H:%M:%S") %></p>
-<p><a href="/articles/">戻る</a></p>
+<p><a href="/">戻る</a></p>
+</div>
