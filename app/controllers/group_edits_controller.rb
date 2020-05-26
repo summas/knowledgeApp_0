@@ -1,6 +1,6 @@
 class GroupEditsController < ApplicationController
   before_action :setLayout
-  require_relative './lib/Util.rb'
+  require_relative './lib/util.rb'
 
   def index
     @util = Util.new
