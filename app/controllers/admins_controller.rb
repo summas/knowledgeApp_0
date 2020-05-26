@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_action :authenticate_account!, only:[:menu,:index,:add,:edit,:delete,:edit]
   before_action :setLayout
   layout 'article'
-  require_relative './lib/Util.rb'
+  require_relative './lib/util.rb'
 　authList = {'1' => '閲覧のみ', '2'  => '閲覧、編集', '3'  => '管理者' }
 
   def menu
