@@ -2,7 +2,7 @@ class ArticleEditsController < ApplicationController
   layout 'article'
   before_action :authenticate_account!, only:[:add,:edit,:delete,:edit]
   before_action :setLayout
-  require_relative './lib/Util.rb'
+  require_relative './lib/util.rb'
 
   def index
     @data = Article.all.order('created_at desc')

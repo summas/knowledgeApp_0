@@ -1,0 +1,12 @@
+<%= javascript_pack_tag 'dummy_data' %>
+<h3 class="display-6 text-primary">
+記事一覧</h3>
+<hr>
+	<div id="side">
+		●カテゴリー
+		<% @categories.all.each do |category| %>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/articles/index/<%= category.id %>"><%= category.name %></a></p>
+		<% end %>
+	</div>
+
+<div id="data"></div>
