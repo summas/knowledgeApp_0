@@ -36,3 +36,5 @@ Dockerfile
 .rubocop*
 knwldg.code-workspace
 .rubocop_todo.yml
+
+/public/uploads/*
