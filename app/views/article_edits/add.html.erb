@@ -10,7 +10,7 @@
 <% end %>
 <div class="container" style="background:#FFFFFF;">
 	<%= form_for(@article, url:{controller:'article_edits', action:'add'}) do |form| %>
-	<div class="form-group">
+	<div class="form-group pt-3">
 		<label for="title">タイトル</label>
 		<%= form.text_field :title, {class:"form-control"} %>
 	</div>
@@ -19,7 +19,7 @@
 		<%= form.rich_text_area :content %>
 	</div>
 	<div class="form-group">
-		<label for="category_id">カテゴリー:</label>
+		<label for="category_id">カテゴリー：</label>
 		<%= form.select :category_id, @util.get_model_hash(@categories)%> 
 	</div>
 	<div class="form-group">
@@ -39,6 +39,6 @@
 	</div>
 	<%= form.submit "投稿" %>
 	<% end %>
-
+	</div>
 <div class="p-3"><a href="/admins/menu/">管理画面</a></div>
-</div>
+
