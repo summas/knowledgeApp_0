@@ -30,9 +30,17 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle pt-3 pr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">管理メニュー</a>
 						<div class="dropdown-menu" style="background:#f8f8ff;">
-							<a class="dropdown-item" href="/article_edits/add">新規投稿</a>			
+							<a class="dropdown-item" href="/article_edits/add">新規投稿</a>	
+							<a class="dropdown-item" href="/article_edits/index">編集記事一覧</a>	
+							 <% if current_account.auth == "9" then%>
+							 <a class="dropdown-item" href="/admins/index/">他のアカウント管理</a>
+							 <a class="dropdown-item" href="/categories/">カテゴリー管理</a>
+							 <a class="dropdown-item" href="/groups/index">グループ管理</a>
+							 <a class="dropdown-item" href="/site_configs/edit">サイト設定</a>
+							  <% end %>	
 							<a class="dropdown-item" href="/admins/menu">管理画面</a>
 								<div class="dropdown-divider"></div>
+							 <a class="dropdown-item" href="/accounts/edit/">アカウント情報変更</a>
 							<a class="dropdown-item btn btn-secondary" rel="nofollow" data-method="delete" href="/accounts/sign_out">ログアウト</a>
 						</div>
 					</li>
@@ -40,21 +48,28 @@
 						<%= image_tag @account.aicon_url(:aicon), class: 'rounded-circle' if @account.aicon.present? %>
 					</li>
 					<% end %>
-					<span class="navbar-text">
+				
 						<% if !account_signed_in? %>
-							<li class="nav-item">
-								<a href="/accounts/sign_in" class="btn btn-secondary">ログイン</a>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle pt-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ログイン</a>
+								<div class="dropdown-menu" style="background:#f8f8ff;">
+									<a class="dropdown-item btn btn-secondary"  rel="nofollow" data-method="post" href="/testsessions">かんたんログイン</a>	
+									<a class="dropdown-item btn btn-secondary" href="/accounts/sign_in">ログイン</a>	
+								</div>
 							</li>
 						<% end %>
-					</span>
+					
 				</ul>
 			</div>
 		</nav>
 			<% if account_signed_in? %>
+			 
 				<div class="float-right text-secondary h6">
-					ログインアカウント：<%= @account.name %>
+					
+					ログインアカウント：<%= @account.name %><br>
+					権限：<%= @auths[@account.auth] %>	
 				</div>
-			<% end %>
+			<% end %> <br>
 		<%= yield %>
 	  <div class="mt-5 text-center small text-scondary border-top border-scondary">
         2020 ナレッジサイト

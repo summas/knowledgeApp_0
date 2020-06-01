@@ -3,7 +3,7 @@ class AiconUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   version :aicon do
-    process :resize_to_fill => [60, 60]
+    process resize_to_fill: [60, 60]
   end
 
   # Choose what kind of storage to use for this uploader:

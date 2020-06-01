@@ -1,10 +1,13 @@
+<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
 <h4 class="display-5 text-primary">
 カテゴリ管理画面</h4>
-<p>※カテゴリーの一覧</p>
-<table>
+<p>※カテゴリー一覧</p>
+<table class="table table-bordered h6" style="background:#FFFFFF;">
+	<thead class="thead-light">
 	<tr>
 		<th>Id</th><th>カテゴリ名</th><th></th><th></th>
 	</tr>
+	</thead>
 	<% @data.each do |obj| %>
 	<tr>
 		<td><%= obj.id %></td>
@@ -14,5 +17,23 @@
 	</tr>
 	<% end %>
 </table>
-<p><a href="/categories/add">新規作成＞＞</a></p>
-<p><a href="/admins/menu">戻る</a></p>
+</div> 
+<br>
+<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
+<p>※カテゴリの登録</p>
+<%= form_for(@category, url:{controller:'categories', action:'add'}) do |form| %>
+<table>
+    <div class="form-group">
+		<td>カテゴリ名：</td>
+		<td><%= form.text_field :name, {class:"form-control"} %>
+	</div>
+</table>
+<div class="text-center">
+	<%= form.submit "登録" %>
+	<% end %>
+</div> 
+</div>
+<div class="text-center">
+	<p><a href="/admins/menu/">戻る</a></p>
+</div>
+<br>

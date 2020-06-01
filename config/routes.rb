@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :accounts, controllers: { registrations: 'accounts/registrations'}
+  devise_for :accounts, controllers: { registrations: 'accounts/registrations' }
 
   root 'articles#index'
 
@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get 'group_edits/add'
   post 'group_edits/add'
   get 'group_edits/edit/:id', to: 'group_edits#edit'
-  
   delete 'group_edits/delete/:id', to: 'group_edits#delete'
 
   get 'admins/menu'
@@ -71,14 +70,7 @@ Rails.application.routes.draw do
   patch 'groups/edit/:id', to: 'groups#edit'
   delete 'groups/delete/:id', to: 'groups#delete'
 
-  # devise_for :accounts, controllers: {
-  #   sessions: 'accounts/sessions'
-  # }
-  # devise_for :accounts, :controllers => {
-  #   :registrations => 'accounts/registrations'
-  #  }
-
-   #devise_for :accounts,controllers: { registrations: "accounts/registrations",}
+  resources :testsessions, only: :create
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
