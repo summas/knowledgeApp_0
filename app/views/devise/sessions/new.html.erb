@@ -1,7 +1,14 @@
-<div class="container mx-auto pt-3 mt-5" style="background:#FFFFFF; width: 200px;">
+<div class="container mx-auto pt-3 pb-3 mt-5" style="background:#FFFFFF; width: 200px;">
 <h3>ログイン</h3>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <span style="color:#ff0000;">
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% elsif alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+  </span>
   <div class="form-group mx-auto">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -21,8 +28,7 @@
 
   <div class="actions">
     <%= f.submit "ログイン" %>
-  </div>
+  </div><br />
 <% end %>
-
-<%= render "devise/shared/links" %>
+<%= link_to "新規登録", new_registration_path(resource_name) %><br />
 </div>

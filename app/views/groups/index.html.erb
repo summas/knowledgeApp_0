@@ -1,19 +1,39 @@
-<h4 class="display-5 text-primary">
+<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
+<h4 class="pt-3">
 グループ管理画面</h4>
 <p>※グループ一覧</p>
-<table>
-	<tr>
-		<th>Id</th><th>グループ名</th><th>編集</th><th>削除</th>
-	</tr>
+<table class="table table-bordered h6" style="background:#FFFFFF;">
+	<thead class="thead-light">
+		<tr>
+			<th>Id</th><th>グループ名</th><th>編集</th><th>削除</th>
+		</tr>
+	</thead>
 	<% @data.each do |obj| %>
 	<tr>
 		<td><%= obj.id %></td>
 		<td><%= obj.name %></td>
 		<td><a href="/groups/edit/<%= obj.id %>">編集</a></td>
-		<td><a href="/groups/delete/<%= obj.id %>" class="alert-link">削除</a></td>
-		<td><%= link_to "削除", "/groups/delete/#{obj.id}", method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
+		<td><%= link_to "削除", "/groups/delete/#{obj.id}", method: :delete, data: {confirm: "本当にグループ「#{obj.name}」を削除しますか？"} %></td>
 	</tr>
 	<% end %>
 </table>
-<p><a href="/groups/add">新規作成＞＞</a></p>
-<p><a href="/admins/menu/">戻る</a></p>
+</div> 
+<br>
+<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">	
+<p>※新しいグループの登録</p>
+
+<%= form_for(@group, url:{controller:'groups', action:'add'}) do |form| %>
+<table>
+    <div class="form-group">
+		<td>グループ名：</td>
+		<td><%= form.text_field :name, {class:"form-control"} %></td>
+	</div>
+</table>
+	<div class="text-center">
+	<%= form.submit "登録" %>
+		<% end %>
+	</div>
+</div> 
+<div class="text-center">
+	<p><a href="/admins/menu/">戻る</a></p>
+</div>

@@ -4,7 +4,7 @@
     <tr>
         <td>○リンク</td>
     </tr>
-    <% if !(@account.auth == "1") then%>
+    <% if !(current_account.auth == "1") then%>
     <tr>
         <td><a href="/article_edits/add">投稿</a></td>
     </tr>
@@ -12,7 +12,7 @@
         <td><a href="/article_edits/index">編集</a></td>
     </tr>
     <% end %>
-    <% if @account.auth == "9" then%>
+    <% if current_account.auth == "9" then%>
     <tr>
         <td><a href="/admins/index/">他のアカウント管理</a></td>
     </tr>
@@ -23,7 +23,7 @@
         <td><a href="/groups/index">グループ管理</a></td>
     </tr>
     <tr>
-        <td><a href="/site_configs/">サイト設定</a></td>
+        <td><a href="/site_configs/edit">サイト設定</a></td>
     </tr>
     <% end %>
     <tr>
