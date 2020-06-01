@@ -1,8 +1,8 @@
 ja:
   views:
     pagination:
-      first: "戦闘"
-      last: "末尾"
+      first: "＜＜"
+      last: "＞＞"
       previous: "前"
       next: "次"
       truncate: "..."

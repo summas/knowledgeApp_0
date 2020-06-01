@@ -1,5 +1,4 @@
-<h1 class="display-4 text-primary">
-Groups#edit</h1>
+<div class="container" style="background:#FFFFFF; width:320px; padding: 10px;">	
 <p>※「<%= @group.name %>」グループの編集</p>
 <% if @group.errors.any? %>
 <ul>
@@ -8,14 +7,18 @@ Groups#edit</h1>
 	<% end %>
 </ul>
 <% end %>
+<div class="mx-auto">
 	<%= form_for(@group, url:{controller:'groups', action:'edit'}) do |form| %>
-<table>
     <div class="form-group">
-    <label for="name">グループ名</label>
-		<td><%= form.text_field :name, {class:"form-control"} %>
+		 <label for="name">グループ名：</label>
+		<%= form.text_field :name, {class:"form-control"} %>
 	</div>
-
-</table>
-<%= form.submit "更新" %>
-<% end %>
-<p><a href="/groups/">戻る</a></p>
+	<div class="text-center">
+		<%= form.submit "更新" %>
+	</div>
+	<% end %>
+</div>
+</div>
+<div class="text-center">
+	<p><a href="/groups/">戻る</a></p>
+</div>

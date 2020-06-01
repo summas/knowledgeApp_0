@@ -1,15 +1,12 @@
 class AdminsController < ApplicationController
   before_action :authenticate_account!, only:[:menu,:index,:add,:edit,:delete,:edit]
-  before_action :setLayout
   layout 'article'
   require_relative './lib/util.rb'
-　authList = {'1' => '閲覧のみ', '2'  => '閲覧、編集', '3'  => '管理者' }
 
   def menu
   end
 
   def index
-    @auths = {'1' => '閲覧のみ', '3'  => '閲覧、編集', '9'  => '管理者' }#仮記載、後で整理
     @accounts = Account.all.order('created_at desc')
   end
 
@@ -61,12 +58,6 @@ class AdminsController < ApplicationController
       @groupRelation = GroupRelation.create group_params
       redirect_to '/admins/groupEdit/3' #+ params[:id]
     end
-  end
-
-  def setLayout
-    @account = current_account
-    @articleconfig = SiteConfig.find 1
-    @categories = Category.all
   end
 
   private
