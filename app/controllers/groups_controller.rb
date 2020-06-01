@@ -1,8 +1,8 @@
 class GroupsController < ApplicationController
-  before_action :setLayout
   layout 'article'
  
   def index
+    @group = Group.new
     @data = Group.all
   end
 
@@ -29,12 +29,6 @@ class GroupsController < ApplicationController
       Article.where(group_id: params[:id]).update(group_id: '０')
     end
     redirect_to '/groups'
-  end
-
-  def setLayout
-    @account = current_account
-    @articleconfig = SiteConfig.find 1
-    @groups = Group.all
   end
 
   private

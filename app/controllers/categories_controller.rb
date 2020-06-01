@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
-  before_action :setLayout
   layout 'article'
 
   def index
+    @category = Category.new
     @data = Category.all
   end
 
@@ -27,12 +27,6 @@ class CategoriesController < ApplicationController
     @category.destroy
     Article.where(category_id: params[:id]).update( category_id: '1')
     redirect_to '/categories'
-  end
-
-  def setLayout
-    @account = current_account
-    @articleconfig = SiteConfig.find 1
-    @categories = Category.all
   end
 
   private

@@ -66,6 +66,6 @@ gem 'carrierwave'
 
 gem 'mini_magick'
 
-#Bootstrap4
-gem 'bootstrap', '~> 4.3.1'
-gem 'jquery-rails'
+gem 'devise-i18n'
+gem 'rails-i18n', '~> 6.0'
+gem 'devise-i18n-views'

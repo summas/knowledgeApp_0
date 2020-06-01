@@ -1,6 +1,5 @@
-<h1 class="display-4 text-primary">
-Categories#edit</h1>
-<p>※「<%= @category.name %>」カテゴリの編集</p>
+<div class="container" style="background:#FFFFFF; width:320px; padding: 10px;">	
+<p>※カテゴリ「<%= @category.name %>」の編集</p>
 <% if @category.errors.any? %>
 <ul>
 	<% @category.errors.full_messages.each do |err| %>
@@ -9,12 +8,16 @@ Categories#edit</h1>
 </ul>
 <% end %>
 <%= form_for(@category, url:{controller:'categories', action:'edit'}) do |form| %>
-<table>
+
     <div class="form-group">
-    <label for="name">カテゴリ名</label>
-		<td><%= form.text_field :name, {class:"form-control"} %>
+    <label for="name">カテゴリ名：</label>
+		<%= form.text_field :name, {class:"form-control"} %>
 	</div>
-</table>
-<%= form.submit "更新" %>
+	<div class="text-center">
+		<%= form.submit "更新" %>
+	</div>
 <% end %>
-<p><a href="/categories/">カテゴリ一覧</a></p>
+</div>
+<div class="text-center">
+	<p><a href="/">記事一覧</a></p>
+</div>

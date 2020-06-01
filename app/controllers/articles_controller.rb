@@ -1,17 +1,17 @@
 class ArticlesController < ApplicationController
   layout 'article'
   before_action :authenticate_account!, only:[:add,:edit,:delete,:edit]
-  before_action :setLayout
 
   def index
     disclosureRanges = 1
     if account_signed_in? then
       if current_account.auth == '9' then
         disclosureRanges = DisclosureRange.pluck("id")
+        groups = Group.all.pluck("id") 
       else
-        disclosureRanges = DisclosureRange.where.not('id = ?', 3).pluck("id")                           
+        disclosureRanges = DisclosureRange.where.not('id = ?', 3).pluck("id")
+        groups = GroupRelation.where(account_id:current_account.id).pluck("group_id")                            
       end
-      groups = GroupRelation.where(account_id:current_account.id).pluck("group_id") 
     else
       groups = Group.all.pluck("id") 
     end
@@ -58,8 +58,7 @@ class ArticlesController < ApplicationController
 		@article = Article.find params[:id]
   end
 
-  def react
-  end
+  def react; end
 
   def ajax
     disclosureRanges = 1
@@ -85,12 +84,6 @@ class ArticlesController < ApplicationController
                     .order('created_at desc')
     end
     render plain:data.to_json 
-  end
-
-  def setLayout
-    @account = current_account
-    @articleconfig = SiteConfig.find 1
-    @categories = Category.all
   end
 
   private
