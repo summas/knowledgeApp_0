@@ -1,5 +1,4 @@
 class GroupEditsController < ApplicationController
-  before_action :setLayout
   require_relative './lib/util.rb'
 
   def index
@@ -36,12 +35,6 @@ class GroupEditsController < ApplicationController
     @groupRelation = GroupRelation.find params[:id]
     @groupRelation.destroy
     redirect_to '/group_edits/index/' + @groupRelation.account_id.to_s
-  end
-
-  def setLayout
-    @account = current_account
-    @articleconfig = SiteConfig.find 1
-    @categories = Category.all
   end
 
   private

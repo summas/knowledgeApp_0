@@ -11,16 +11,29 @@
 	<% @data.each do |obj| %>
 		<div class="d-flex rounded m-md-2 w-75" id="article" style="background:#FFFFFF;">
 			<div class="card-body">
-			<a href="/articles/show/<%= obj.id %>">
-				<span class="float-left pr-3" ><%= image_tag obj.image_url(:thumb) if obj.image.present? %></span>
-				<h3 class="text-secondary"><%= obj.title %></h3>
-			</a>
-				<span class="float-right text-secondary h6 pr-3 pt-3">
-				<% if account_signed_in? %>
-					投稿者：<%= obj.account.name %><br>
+			<% if account_signed_in? %>
+			<div class="d-inline-block w-75">
 				<% end %>
-					投稿日：<%= obj.created_at.strftime(" %Y.%m.%d %a %H:%M") %>
-				</span>
+				<a href="/articles/show/<%= obj.id %>">
+					<span class="float-left pr-3" ><%= image_tag obj.image_url(:thumb) if obj.image.present? %></span>
+					<h3 class="text-secondary"><%= obj.title %></h3>
+				</a>
+				<% if account_signed_in? %>
+				</div>
+				<% end %>
+				<% if account_signed_in? %>
+				<div class="d-inline-block float-right w-25">
+						<a class="float-right h6 pl-6"href="/article_edits/<%= obj.id %>">編集</a>
+					<% end %>
+					<span class="float-right text-secondary h6 pr-3 pt-3">
+					<% if account_signed_in? %>
+						<br>投稿者：<%= obj.account.name %>
+					<% end %>
+						<br>投稿日：<%= obj.created_at.strftime(" %Y.%m.%d") %>
+					</span>
+					<% if account_signed_in? %>
+				</div>
+				<% end %>
 			</div>
 		</div>
 	<% end %>

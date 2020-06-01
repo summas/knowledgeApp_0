@@ -1,11 +1,11 @@
 class ArticleEditsController < ApplicationController
   layout 'article'
   before_action :authenticate_account!, only:[:add,:edit,:delete,:edit]
-  before_action :setLayout
   require_relative './lib/util.rb'
 
   def index
-    @data = Article.all.order('created_at desc')
+    @data = Article.all.order('created_at desc').page(params[:page])
+    .per(15)
   end
 
   def add
@@ -43,12 +43,6 @@ class ArticleEditsController < ApplicationController
     @data = Article.where('category_id = ?', params[:id])
     .order('created_at desc')
     .page params[:page]
-  end
-
-  def setLayout
-    @articleconfig = SiteConfig.find 1
-    @categories = Category.all
-    @account = current_account
   end
 
   private
