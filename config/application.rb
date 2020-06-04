@@ -23,6 +23,12 @@ module KnowledgeApp
     config.i18n.load_path +=
       Dir[Rails.root.join('config', 'locals', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ja
+
+
+    #config.autoload_paths += %W(#{Rails.root}/app/controllers/lib)
+    #config.eager_load_paths += %W(#{Rails.root}/app/controllers/lib)
+
+    config.paths.add '/app/controllers/lib', eager_load: true
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
