@@ -5,8 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-SiteConfig.create(id: 1, title: 'ナレッジサイト', subtitle: '情報共有システム', style: 'gray')
-Category.create(id: 1, name: '技術情報')
-DisclosureRange.create(id: 1, name: '外部公開')
-DisclosureRange.create(id: 2, name: '社外秘')
-DisclosureRange.create(id: 3, name: '管理者のみ')
+Account.create(id: 2, name: 'test user', password: 'qwerty', email: 'qwerty@example.com', auth: 9)

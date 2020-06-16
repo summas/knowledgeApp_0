@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
 
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :set_layout
-  
+    protect_from_forgery with: :exception
+    
     protected
   
       def configure_permitted_parameters
