@@ -4,18 +4,21 @@ class ArticlesController < ApplicationController
 
   def index
     disclosureRanges = 1
+    commonGroup = 1
+    admin = 3
     if account_signed_in? then
       if current_account.auth == '9' then
         disclosureRanges = DisclosureRange.pluck("id")
         groups = Group.all.pluck("id") 
       else
-        disclosureRanges = DisclosureRange.where.not('id = ?', 3).pluck("id")
-        groups = GroupRelation.where(account_id:current_account.id).pluck("group_id")                            
+        disclosureRanges = DisclosureRange.where.not('id = ?', admin).pluck("id")
+        groups = GroupRelation.where(account_id:current_account.id)
+                              .pluck("group_id")
+        groups.push(commonGroup) 
       end
     else
       groups = Group.all.pluck("id") 
     end
-
     if !params[:id] then
       @data = Article.where(disclosureRange_id: disclosureRanges)
                      .where(group_id: groups)

@@ -39,14 +39,14 @@ function getData(f){
         var str = "/articles/show/" + val.id;
         var date = new Date(val.created_at)
         arr.push(
-        <div class="d-flex rounded m-md-2 w-75" id="article" style={{background:'#FFFFFF'}}>
-        <div class="card-body">
+        <div className="d-flex rounded m-md-2 w-75" id="article" style={{background:'#FFFFFF'}}>
+        <div className="card-body">
         <a href={str}>
-        <span class="float-left pr-3" >
+        <span className="float-left pr-3" >
           <img src={val.image.url} width="100" height="100"/></span>
-          <h3 class="text-secondary">{val.title}</h3>
+          <h3 className="text-secondary">{val.title}</h3>
         </a>
-        <span class="float-right text-secondary h6 pr-3 pt-3">
+        <span className="float-right text-secondary h6 pr-3 pt-3">
           投稿日: {date.toLocaleDateString()}
         </span>
           </div></div>);
