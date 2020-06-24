@@ -1,11 +1,13 @@
 class ArticleEditsController < ApplicationController
   layout 'article'
-  before_action :authenticate_account!, only:[:add,:edit,:delete,:edit]
+  before_action :authenticate_account!, only:[:index,:add,:edit,:delete,:edit]
   require_relative './lib/util.rb'
 
   def index
-    @data = Article.all.order('created_at desc').page(params[:page])
-    .per(15)
+    @data = Article.where(account_id:current_account.id)
+                  .order('created_at desc')
+                  .page(params[:page])
+                  .per(15)
   end
 
   def add
