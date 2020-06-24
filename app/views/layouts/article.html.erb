@@ -19,9 +19,10 @@
 	<body class="container" style="background:#f8f8ff;">
 		<nav class="navbar navbar-dark bg-dark navbar-expand-lg mb-4">
 			<a class="navbar-brand" href="/"><%= @articleconfig.title %></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<% if account_signed_in? %>
+				<a class="navbar-brand" href="/article_edits/add">新規投稿</a>
+				<a class="navbar-brand" href="/article_edits/index">編集記事一覧</a>	
+			<% end %>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav mr-auto">
 				</ul>
@@ -30,7 +31,6 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle pt-3 pr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">管理メニュー</a>
 						<div class="dropdown-menu" style="background:#f8f8ff;">
-							<a class="dropdown-item" href="/article_edits/add">新規投稿</a>	
 							<a class="dropdown-item" href="/article_edits/index">編集記事一覧</a>	
 							 <% if current_account.auth == "9" then%>
 							 <a class="dropdown-item" href="/admins/index/">他のアカウント管理</a>
@@ -48,7 +48,6 @@
 						<%= image_tag @account.aicon_url(:aicon), class: 'rounded-circle' if @account.aicon.present? %>
 					</li>
 					<% end %>
-				
 						<% if !account_signed_in? %>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle pt-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ログイン</a>
@@ -58,17 +57,14 @@
 								</div>
 							</li>
 						<% end %>
-					
 				</ul>
 			</div>
 		</nav>
 			<% if account_signed_in? %>
-			 
 				<div class="float-right text-secondary h6">
-					
 					ログインアカウント：<%= @account.name %><br>
 					権限：<%= @auths[@account.auth] %>	
-				</div>
+				</div><br>
 			<% end %> <br>
 		<%= yield %>
 	  <div class="mt-5 text-center small text-scondary border-top border-scondary">
