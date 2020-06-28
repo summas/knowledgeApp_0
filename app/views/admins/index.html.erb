@@ -21,7 +21,7 @@
 						<a class="nav-link dropdown-toggle text-secondary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">編集項目</a>
 						<div class="dropdown-menu" style="background:#f8f8ff;">
 							<a class="dropdown-item" href="/admins/edit/<%= obj.id %>">ユーザー情報編集</a>
-							<a class="dropdown-item" href="/group_edits/index/<%= obj.id %>">グループ編集</a>
+							<a class="dropdown-item" href="/admins/groupEdit/<%= obj.id %>">グループ編集</a>
 							<%= link_to "削除", "/admins/delete/#{obj.id}",{method: :delete, data: {confirm: "本当にこのアカウントを削除しますか？"}, class: "dropdown-item"} %>
 						</div>
 					</div>
@@ -31,4 +31,4 @@
 		</table>
 	</div>
 <p><a href="/admins/add">新規登録</a></p>
-<p><a href="/admins/menu">戻る</a></p>
+<p><%= link_to :back do %>戻る<% end %></p>

@@ -1,14 +1,38 @@
-<h1 class="display-4 text-primary">
-Articles#edit</h1>
+<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
+<h4 class="pt-3">
+グループ管理画面</h4>
+<p>『<%= @edit_account.name %>』の所属グループ</p>
+<table class="table table-bordered h6" style="background:#FFFFFF;">
+	<thead class="thead-light">
+		<tr>
+			<th>Id</th><th>グループ名</th><th>削除</th>
+		</tr>
+	</thead>
 <% @groupRelation.each do |obj| %>
-<table>
+<tr>
 	<td><%= obj.group_id %></td>
-	<td><%= obj.account_id %></td>
-	<td><a href="/admins/groupEdit/<%= obj.id %>">グループ編集</a></td>
-	<td><a href="/admins/edit/<%= obj.id %>">編集</a></td>
-	<td><%= link_to "削除", "/admins/delete/#{obj.id}", method: :delete, data: {confirm: "本当にこのアカウントを削除しますか？"} %></td>
-</table>
+	<td><%= obj.group.name %></td>
+	<td><%= link_to "削除", "/group_edits/delete/#{obj.id}/#{@edit_account.id}", method: :delete, data: {confirm: "グループ『#{obj.group.name}』を削除しますか？"} %></td>
+</tr>
 <% end %>
+</table>
+</div> 
+<br>
+<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
+<p class="text-center">※追加可能なグループ</p>
+<%= form_for(@groupRelationAdd, url:{controller:'group_edits', action:'add'}) do |form| %>
 
-<p><a href="/admins/group_add">新規追加</a></p>
-<p><a href="/admins/menu">戻る</a></p>
+	<div class="form-group text-center">
+		<%= form.select :group_id, @addGroups %>
+	</div>
+	<div class="form-group h6 align-text-top" style="vertical-align:0.8em;">
+		<%= form.hidden_field :account_id , value: @edit_account.id  %>
+	</div>
+	<div class="text-center">
+		<%= form.submit "追加する" %>
+	</div>
+<% end %>
+</div>
+<div class="text-center">
+<p><a href="/admins/index">戻る</a></p>
+</div>

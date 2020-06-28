@@ -6,4 +6,5 @@ class Article < ApplicationRecord
     has_rich_text :content
     paginates_per 5
     mount_uploader :image, ImageUploader
+  #  enum disclosureRange_id: {外部公開:1, 社外秘:2, 管理者のみ:3}
 end
