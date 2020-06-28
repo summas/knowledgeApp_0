@@ -1,4 +1,4 @@
-<h3 class="display-6 text-primary">
+<h3 class="display-6 text-secondary">
 記事一覧</h3>
 <hr>
 	<div id="side">
@@ -15,7 +15,13 @@
 			<div class="d-inline-block w-75">
 				<% end %>
 				<a href="/articles/show/<%= obj.id %>">
-					<span class="float-left pr-3" ><%= image_tag obj.image_url(:thumb) if obj.image.present? %></span>
+					<span class="float-left pr-3" >
+						<% if obj.image.present? %>
+							<%= image_tag obj.image_url(:thumb) %>
+						<% else %>
+							<%= image_tag 'no-image.png', :size => '100x100' %>
+						<% end %>
+					</span>
 					<h3 class="text-secondary"><%= obj.title %></h3>
 				</a>
 				<% if account_signed_in? %>

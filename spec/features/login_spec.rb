@@ -6,6 +6,7 @@ RSpec.feature "Logins", type: :feature do
 		account=FactoryBot.create(:account)
 		FactoryBot.create(:siteConfig)
 		visit root_path
+		find(".dropdown-toggle").click
 		click_link "ログイン"
 		fill_in "account[email]", with:account.email  #"qwerty@example.com"
 		fill_in "account[password]", with:account.password #"qwerty"

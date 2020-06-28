@@ -21,7 +21,7 @@
 			<a class="navbar-brand" href="/"><%= @articleconfig.title %></a>
 			<% if account_signed_in? %>
 				<a class="navbar-brand" href="/article_edits/add">新規投稿</a>
-				<a class="navbar-brand" href="/article_edits/index">編集記事一覧</a>	
+				<a class="navbar-brand" href="/article_edits/index">投稿記事一覧</a>
 			<% end %>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav mr-auto">
@@ -31,21 +31,24 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle pt-3 pr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">管理メニュー</a>
 						<div class="dropdown-menu" style="background:#f8f8ff;">
-							<a class="dropdown-item" href="/article_edits/index">編集記事一覧</a>	
 							 <% if current_account.auth == "9" then%>
 							 <a class="dropdown-item" href="/admins/index/">他のアカウント管理</a>
 							 <a class="dropdown-item" href="/categories/">カテゴリー管理</a>
 							 <a class="dropdown-item" href="/groups/index">グループ管理</a>
 							 <a class="dropdown-item" href="/site_configs/edit">サイト設定</a>
 							  <% end %>	
-							<a class="dropdown-item" href="/admins/menu">管理画面</a>
 								<div class="dropdown-divider"></div>
 							 <a class="dropdown-item" href="/accounts/edit/">アカウント情報変更</a>
 							<a class="dropdown-item btn btn-secondary" rel="nofollow" data-method="delete" href="/accounts/sign_out">ログアウト</a>
 						</div>
 					</li>
 					<li class="nav-item pr-3">
-						<%= image_tag @account.aicon_url(:aicon), class: 'rounded-circle' if @account.aicon.present? %>
+						<% if @account.aicon.present? %>
+								<%= image_tag @account.aicon_url(:aicon), class: 'rounded-circle' %>
+						<% else %>
+							<%= image_tag 'no-image.png', :size => '60x60', class: 'rounded-circle' %>
+						<% end %>
+					
 					</li>
 					<% end %>
 						<% if !account_signed_in? %>
