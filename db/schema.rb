@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_055301) do
+ActiveRecord::Schema.define(version: 2020_06_25_054107) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_055301) do
     t.string "auth", default: "3"
     t.string "organization"
     t.string "aicon"
+    t.integer "group_id"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end

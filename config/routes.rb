@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'group_edits/add'
   post 'group_edits/add'
   get 'group_edits/edit/:id', to: 'group_edits#edit'
-  delete 'group_edits/delete/:id', to: 'group_edits#delete'
+  delete 'group_edits/delete/:g_reration_id/:account_id', to: 'group_edits#delete'
 
   get 'admins/menu'
   get 'admins/index'
