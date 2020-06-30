@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
   def index
     disclosureRanges = 1
     commonGroup = 1
+    @is_category = false
     admin = 3
     if account_signed_in? then
       if current_account.auth == '9' then
@@ -25,6 +26,7 @@ class ArticlesController < ApplicationController
                      .order('created_at desc')
                      .page params[:page]
     else
+      @is_category = params[:id]
       @data = Article.where(disclosureRange_id: disclosureRanges)
                     .where(group_id: groups)
                     .where('category_id = ?', params[:id])

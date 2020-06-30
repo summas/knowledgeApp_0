@@ -1,5 +1,9 @@
-<h3 class="display-6 text-secondary">
-記事一覧</h3>
+
+	<% if @is_category && @data[0] %>
+		<span class="h5 pl-4 text-secondary">『<%= @data[0].category.name %>』</span>
+	<% end %>
+
+
 <hr>
 	<div id="side">
 		●カテゴリー
@@ -7,6 +11,7 @@
 			<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/articles/index/<%= category.id %>"><%= category.name %></a></p>
 		<% end %>
 	</div>
+
 
 	<% @data.each do |obj| %>
 		<div class="d-flex rounded m-md-2 w-75" id="article" style="background:#FFFFFF;">
@@ -22,7 +27,12 @@
 							<%= image_tag 'no-image.png', :size => '100x100' %>
 						<% end %>
 					</span>
-					<h3 class="text-secondary"><%= obj.title %></h3>
+					<h4 class="text-secondary">
+						<% if account_signed_in? %>
+							<span class="h6" ><<%= obj.disclosureRange.name %>></span>:
+						<% end %>
+							<%= obj.title %>
+					</h4>
 				</a>
 				<% if account_signed_in? %>
 				</div>
