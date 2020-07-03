@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   layout 'article'
+  before_action :authenticate_account!, only:[:index,:add,:edit,:delete,:edit]
 
   def index
     @category = Category.new
@@ -22,11 +23,20 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def delete
+  def stop
     @category = Category.find params[:id]
-    @category.destroy
-    Article.where(category_id: params[:id]).update( category_id: '1')
-    redirect_to '/categories'
+    if request.patch? then
+      @category.update(del_flg: DelFlg::STOP)
+      redirect_to '/categories'
+    end
+  end
+
+  def restart
+    @category = Category.find params[:id]
+    if request.patch? then
+      @category.update(del_flg: DelFlg::START)
+      redirect_to '/categories'
+    end
   end
 
   private

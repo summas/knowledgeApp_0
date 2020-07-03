@@ -1,17 +1,17 @@
 
-	<% if @is_category && @data[0] %>
-		<span class="h5 pl-4 text-secondary">『<%= @data[0].category.name %>』</span>
+	<% if @is_category %>
+		<span class="h5 pl-4 text-secondary">『<%= @category_name %>』</span>
 	<% end %>
-
 
 <hr>
 	<div id="side">
-		●カテゴリー
+		　<span class="text-secondary h6 pl-3">カテゴリー</span>
+		<div class="btn-group-vertical pl-3">
 		<% @categories.all.each do |category| %>
-			<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/articles/index/<%= category.id %>"><%= category.name %></a></p>
+			<a href="/articles/index/<%= category.id %>/<%= category.name %>/" class="btn btn-secondary"><%= category.name %></a>
 		<% end %>
+		</div>
 	</div>
-
 
 	<% @data.each do |obj| %>
 		<div class="d-flex rounded m-md-2 w-75" id="article" style="background:#FFFFFF;">

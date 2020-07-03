@@ -1,7 +1,16 @@
 
 <div class="container" style="background:#FFFFFF; padding: 10px;">
-<h2 class="show_title pt-3"><%= @article.title %></h2><a class="float-right h6 pl-6"href="/article_edits/<%= @article.id %>">この記事を編集する</a>
-<p class="show_read float-left text-secondary h6 pr-3">投稿者：<%= @article.account.name + '　カテゴリー：[' + @article.category.name + ']'+ '　グループ：[' + @article.group.name + ']'  + '　＜' + @article.disclosureRange.name + '＞'%></p><br>
+<h2 class="show_title pt-3"><%= @article.title %></h2>
+<% if account_signed_in? %>
+    <a class="float-right h6 pl-6"href="/article_edits/<%= @article.id %>">この記事を編集する</a>
+<% end %>
+<p class="show_read float-left text-secondary h6 pr-3">
+<% if account_signed_in? %>
+    投稿者：<%= @article.account.name + '　カテゴリー：[' + @article.category.name + ']'+ '　グループ：[' + @article.group.name + ']'  + '　＜' + @article.disclosureRange.name + '＞'%>
+<% else %>
+    <%= 'カテゴリー：[' + @article.category.name + ']' %>
+<% end %>
+</p><br>
 <span class="show_created float-right text-secondary h6 pr-3"><%= @article.created_at.strftime(" %Y.%m.%d %a %H:%M:%S") %></span><br>
 <hr>
 <%= @article.content %>
