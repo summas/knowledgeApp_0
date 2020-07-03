@@ -10,7 +10,6 @@ class SiteConfigsController < ApplicationController
     @articleconfig = SiteConfig.find 1
     if request.patch? then
       @articleconfig.update siteconfig_params
-      redirect_to '/site_configs'
     end
   end
 

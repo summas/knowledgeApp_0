@@ -1,30 +1,28 @@
-<h2 class="display-6 text-primary">
-記事一覧</h2>
-<p>※投稿記事の一覧</p>
-<div class="container" style="background:#FFFFFF;">	
-	<div style="overflow-x: scroll;">	
-		<table class="table table-bordered table-responsive h6" style="background:#FFFFFF;">
-			<thead class="thead-light">
-				<tr>
-					<th>ID</th><th >タイトル</th><th>投稿者</th><th>カテゴリー</th><th>グループ</th><th>公開範囲</th><th></th><th></th>
-				</tr>
-			</thead>
-			<% @data.each do |obj| %>
+<p>※『<%= current_account.name %>』の投稿記事一覧</p>
+
+<div class="container table-scroll">	
+	<table class="table table-bordered w-100" style="background:#FFFFFF; font-size:0.6em;" >
+		<thead class="thead-light">
 			<tr>
-				<td><%= obj.id %></td>
-				<td><%= obj.title %></td>
-				<td><%= obj.account.name %></td>
-				<td><%= obj.category.name %></td>
-				<td><%= obj.group.name %></td>
-				<td><%= obj.disclosureRange.name %></td>
-				<td><a href="/article_edits/<%= obj.id %>">編集</a></td>
-				<td><a href="/article_edits/delete/<%= obj.id %>">削除</a></td>
+				<th>ID</th><th>タイトル</th><th>投稿者</th><th class="w-15">カテゴリー</th><th>グループ</th><th>公開範囲</th><th></th><th></th>
 			</tr>
-			<% end %>
-		</table>
-		<div class="navigate">
-			<div><%= paginate @data %></div>
-		</div>
+		</thead>
+		<% @data.each do |obj| %>
+		<tr>
+			<td><span style=""><%= obj.id %></td></span>
+			<td><a href="/articles/show/<%= obj.id %>"><%= obj.title %></a></td>
+			<td><%= obj.account.name %></td>
+			<td><%= obj.category.name %></td>
+			<td><%= obj.group.name %></td>
+			<td><%= obj.disclosureRange.name %></td>
+			<td><a href="/article_edits/<%= obj.id %>">編集</a></td>
+			<td><a href="/article_edits/delete/<%= obj.id %>">削除</a></td>
+		</tr>
+		<% end %>
+	</table>
+	<div class="navigate">
+		<div><%= paginate @data %></div>
 	</div>
-	</div>
-<p><a href="/admins/menu">戻る</a></p>
+</div>
+
+<p><a href="/">戻る</a></p>

@@ -11,6 +11,7 @@ class AdminsController < ApplicationController
   end
 
   def add
+    @auth_select = AuthSelect::ADMIN
     @editAccount = Account.new
     if request.post? then
       @editAccount = Account.create account_params
@@ -39,16 +40,12 @@ class AdminsController < ApplicationController
   end
 
   def group_edit
-   # if params[:id].present? then
-    #  @groups = Group.find params[:id]
-    @groupRelation = GroupRelation.where(account_id:params[:id])
-    if @groupRelation.blank? then
-       @groupRelation = GroupRelation.new
-    end
-    if request.patch? then
-      @groups.update group_params
-      redirect_to '/admins/group_edit'
-    end
+    @util = Util.new
+    @edit_account = Account.select('id', 'name').find(params[:id])
+    @groupRelation = GroupRelation.select('id','group_id').where('account_id = ?', params[:id]).order('group_id')
+    groupIds = GroupRelation.where('account_id = ?', params[:id]).pluck("group_id")
+    @addGroups = @util.get_model_hash(Group.where.not(id:groupIds))
+    @groupRelationAdd = GroupRelation.new
   end
 
   def group_add

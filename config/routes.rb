@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'group_edits/add'
   post 'group_edits/add'
   get 'group_edits/edit/:id', to: 'group_edits#edit'
-  delete 'group_edits/delete/:id', to: 'group_edits#delete'
+  delete 'group_edits/delete/:g_reration_id/:account_id', to: 'group_edits#delete'
 
   get 'admins/menu'
   get 'admins/index'
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   get 'articles', to: 'articles#index'
   get 'articles/index'
-  get 'articles/index/:id', to: 'articles#index'
+  get 'articles/index/:id/:name', to: 'articles#index'
   get 'articles/category'
   get 'articles/category/:id', to: 'articles#category'
   get 'articles/show'
@@ -53,9 +53,8 @@ Rails.application.routes.draw do
   get 'categories/edit'
   get 'categories/edit/:id', to: 'categories#edit'
   patch 'categories/edit/:id', to: 'categories#edit'
-  get 'categories/delete/:id', to: 'categories#delete'
-  post 'categories/delete/:id', to: 'categories#delete'
-  delete 'categories/delete/:id', to: 'categories#delete'
+  patch 'categories/stop/:id', to: 'categories#stop'
+  patch 'categories/restart/:id', to: 'categories#restart'
 
   get 'site_configs/index'
   get 'site_configs' , to: 'site_configs#index'
@@ -68,7 +67,8 @@ Rails.application.routes.draw do
   post 'groups/add'
   get 'groups/edit/:id', to: 'groups#edit'
   patch 'groups/edit/:id', to: 'groups#edit'
-  delete 'groups/delete/:id', to: 'groups#delete'
+  patch 'groups/stop/:id', to: 'groups#stop'
+  patch 'groups/restart/:id', to: 'groups#restart'
 
   resources :testsessions, only: :create
 

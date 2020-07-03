@@ -18,27 +18,36 @@
 		<label for="content">記事</label>
 		<%= form.rich_text_area :content %>
 	</div>
-	<div class="form-group">
-		<label for="category_id">カテゴリー：</label>
-		<%= form.select :category_id, @util.get_model_hash(@categories)%> 
-	</div>
-	<div class="form-group">
-		<label for="group_id">グループ:</label>
-		<%= form.select :group_id, @util.get_model_hash(@groups)%> 
-	</div>
-	<div class="form-group">
-		<label for="disclosureRange_id">公開範囲:</label>
-		<%= form.select :disclosureRange_id, @util.get_model_hash(@disclosureRanges)%> 
-	</div>
-	<div class="form-group">
-		<label for="image">サムネイル:</label>
-		<%= form.file_field :image %>
-	</div>
-	<div class="form-group">
-	  <%= form.hidden_field :account_id, value: @account.id%> 
-	</div>
-	<%= form.submit "投稿" %>
-	<% end %>
-	</div>
-<div class="p-3"><a href="/admins/menu/">管理画面</a></div>
+	 <table class="table table-borderless h6"  style="background:#f8f8ff;">
+		<tr class="d-flex">
+			<div class="form-group">
+				<td class="col-2 text-right pt-4">カテゴリー：</td>
+				<td class="col-5"><%= form.select :category_id, @util.get_model_hash(@categories_select), {}, class: 'form-control' %> </td>
+			</div>
+		</tr><tr class="d-flex">
+			<div class="form-group">
+				<td class="col-2 text-right pt-4"><label for="group_id">グループ：</label></td>
+				<td class="col-5"><%= form.select :group_id, @util.get_model_hash(@groups), {}, class: 'form-control' %> </td>
+			</div>
+		</tr><tr class="d-flex">
+			<div class="form-group">
+				<td class="col-2 text-right pt-4"><label for="disclosureRange_id">公開範囲：</label></td>
+				<td class="col-5"><%= form.select :disclosureRange_id, @util.get_model_hash(@disclosureRanges), {}, class: 'form-control w-75' %> </td>
+			</div>
+		</tr><tr class="d-flex">
+			<div class="form-group">
+				<td class="col-2 text-right pt-3"><label for="image">アイキャッチ：</label></td>
+				<td class="col-5"><%= form.file_field :image %></td>
+			</div>
+		</tr>
+	</table>
+		<div class="form-group">
+	  		<%= form.hidden_field :account_id, value: current_account.id%> 
+		</div>
+		<div class="text-center pb-3 pt-1">
+			<%= form.submit "投稿する", class: 'btn btn-secondary'%>
+		</div>
+	<% end %> 
+</div>
+<div class="p-3"><a href="/">戻る</a></div>
 

@@ -1,11 +1,11 @@
 <div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
-<h4 class="display-5 text-primary">
+<h4 class="pt-3">
 カテゴリ管理画面</h4>
-<p>※カテゴリー一覧</p>
+<span class="h6">※カテゴリ一覧</span>
 <table class="table table-bordered h6" style="background:#FFFFFF;">
 	<thead class="thead-light">
 	<tr>
-		<th>Id</th><th>カテゴリ名</th><th></th><th></th>
+		<th>Id</th><th>カテゴリ名</th><th>編集</th><th>使用</th>
 	</tr>
 	</thead>
 	<% @data.each do |obj| %>
@@ -13,7 +13,11 @@
 		<td><%= obj.id %></td>
 		<td><%= obj.name %></td>
 		<td><a href="/categories/edit/<%= obj.id %>">編集</a></td>
-		<td><%= link_to "削除", "/categories/delete/#{obj.id}", method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
+		<% if !(obj.del_flg == DelFlg::STOP) %> 
+			<td><%= link_to "停止", "/categories/stop/#{obj.id}", method: :patch, data: {confirm: "本当にカテゴリー「#{obj.name}」を使用停止にしますか？？"} %></td>
+		<% else %>
+			<td><%= link_to "再開", "/categories/restart/#{obj.id}", method: :patch, data: {confirm: "本当にカテゴリー「#{obj.name}」の使用を再開しますか？"} %></td>
+		<% end %>
 	</tr>
 	<% end %>
 </table>
@@ -34,6 +38,6 @@
 </div> 
 </div>
 <div class="text-center">
-	<p><a href="/admins/menu/">戻る</a></p>
+	<p><a href="/">戻る</a></p>
 </div>
 <br>
