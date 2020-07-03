@@ -11,7 +11,7 @@
 	</div>
 	<div class="form-group">
 	  <label for="auth">権限</label>
-	  <%= form.select :auth, [['閲覧のみ', '1'], ['閲覧、編集', '3'], ['管理者', '9']] %> 
+	  <%= form.select :auth, AuthSelect::ADMIN %> 
 	</div>
     <div class="form-group">
 	  <label for="email">Eメールアドレス</label>

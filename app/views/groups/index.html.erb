@@ -1,11 +1,11 @@
 <div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
 <h4 class="pt-3">
 グループ管理画面</h4>
-<p>※グループ一覧</p>
+<span class="h6">※グループ一覧</span>
 <table class="table table-bordered h6" style="background:#FFFFFF;">
 	<thead class="thead-light">
 		<tr>
-			<th>Id</th><th>グループ名</th><th>編集</th><th>削除</th>
+			<th>Id</th><th>グループ名</th><th>編集</th><th>使用</th>
 		</tr>
 	</thead>
 	<% @data.each do |obj| %>
@@ -13,10 +13,15 @@
 		<td><%= obj.id %></td>
 		<td><%= obj.name %></td>
 		<td><a href="/groups/edit/<%= obj.id %>">編集</a></td>
-		<td><%= link_to "削除", "/groups/delete/#{obj.id}", method: :delete, data: {confirm: "本当にグループ「#{obj.name}」を削除しますか？"} %></td>
+		<% if !(obj.del_flg == DelFlg::STOP) %> 
+			<td><%= link_to "停止", "/groups/stop/#{obj.id}", method: :patch, data: {confirm: "本当にグループ「#{obj.name}」を使用停止にしますか？"} %></td>
+		<% else %>	
+			<td><%= link_to "再開", "/groups/restart/#{obj.id}", method: :patch, data: {confirm: "本当にグループ「#{obj.name}」の使用を再開しますか？"} %></td>
+		<% end %>	
 	</tr>
 	<% end %>
 </table>
+<span class="h6">※停止すると記事の登録や編集で該当グループは選択できなくなります。</span>
 </div> 
 <br>
 <div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">	
@@ -35,5 +40,5 @@
 	</div>
 </div> 
 <div class="text-center">
-	<p><a href="/admins/menu/">戻る</a></p>
+	<p><a href="/">戻る</a></p>
 </div>

@@ -11,8 +11,7 @@ class ApplicationController < ActionController::Base
       end
 
       def set_layout
-        @auths = AUTH::NAME 
-        @account = current_account
+        @auths = Auth::MATRIX
         @articleconfig = SiteConfig.find 1
         @categories = Category.all
       end

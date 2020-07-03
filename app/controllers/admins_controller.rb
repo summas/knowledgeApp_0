@@ -11,6 +11,7 @@ class AdminsController < ApplicationController
   end
 
   def add
+    @auth_select = AuthSelect::ADMIN
     @editAccount = Account.new
     if request.post? then
       @editAccount = Account.create account_params

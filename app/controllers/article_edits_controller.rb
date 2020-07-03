@@ -2,6 +2,7 @@ class ArticleEditsController < ApplicationController
   layout 'article'
   before_action :authenticate_account!, only:[:index,:add,:edit,:delete,:edit]
   require_relative './lib/util.rb'
+  require "#{Rails.root}/config/initializers/constants.rb"
 
   def index
     @data = Article.where(account_id:current_account.id)
@@ -13,8 +14,20 @@ class ArticleEditsController < ApplicationController
   def add
     @util = Util.new
     @article = Article.new
-    @groups = Group.all
-    @disclosureRanges = DisclosureRange.all
+    if account_signed_in? then
+      if current_account.auth == Auth::ADMIN then
+        @disclosureRanges = DisclosureRange.all
+        @groups = Group.where('del_flg = ?', DelFlg::START)
+        puts @groups
+      else
+        @disclosureRanges = DisclosureRange.where.not('id = ?', DisclosureRangeList::ADMIN)
+        @groups = Group.where(id: GroupRelation.where(account_id:current_account.id)
+                      .pluck("group_id"))
+                      .where('del_flg = ?', DelFlg::START)
+      end
+      @categories_select = Category.where('del_flg = ?', DelFlg::START)
+    end
+
     if request.post? then
       @article = Article.create articles_params
       redirect_to '/articles/index'
