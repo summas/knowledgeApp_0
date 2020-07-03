@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   layout 'article'
+  before_action :authenticate_account!, only:[:index,:add,:edit,:delete,:edit]
  
   def index
     @group = Group.new
@@ -22,13 +23,20 @@ class GroupsController < ApplicationController
     end
   end
 
-  def delete
+  def stop
     @group = Group.find params[:id]
-    ActiveRecord::Base.transaction do
-      @group.destroy
-      Article.where(group_id: params[:id]).update(group_id: '０')
+    if request.patch? then
+      @group.update(del_flg: DelFlg::STOP)
+      redirect_to '/groups'
     end
-    redirect_to '/groups'
+  end
+
+  def restart
+    @group = Group.find params[:id]
+    if request.patch? then
+      @group.update(del_flg: DelFlg::START)
+      redirect_to '/groups'
+    end
   end
 
   private

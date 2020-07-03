@@ -1,5 +1,6 @@
 class GroupEditsController < ApplicationController
-  require_relative './lib/util.rb'
+  require "#{Rails.root}/config/initializers/constants.rb"
+  before_action :authenticate_account!, only:[:index,:add,:edit,:delete,:edit]
 
   def index
     @util = Util.new
