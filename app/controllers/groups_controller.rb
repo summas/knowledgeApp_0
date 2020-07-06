@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
   def restart
     @group = Group.find params[:id]
     if request.patch? then
-      @group.update(del_flg: DelFlg::START)
+      @group.update(del_flg: DelFlg::USE)
       redirect_to '/groups'
     end
   end

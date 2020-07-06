@@ -31,6 +31,6 @@ end
 
 module DelFlg
   STOP = 1
-  START = 0
+  USE = 0
 end
 

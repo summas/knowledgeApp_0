@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
   def restart
     @category = Category.find params[:id]
     if request.patch? then
-      @category.update(del_flg: DelFlg::START)
+      @category.update(del_flg: DelFlg::USE)
       redirect_to '/categories'
     end
   end
