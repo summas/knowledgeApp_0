@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
                               .pluck("group_id")
         groups.push(commonGroup) 
       end
+      session[:account_groups] = groups
     else
       groups = Group.all.pluck("id") 
     end

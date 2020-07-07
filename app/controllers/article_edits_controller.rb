@@ -17,7 +17,6 @@ class ArticleEditsController < ApplicationController
     if current_account.auth == Auth::ADMIN then
       @disclosureRanges = DisclosureRange.all
       @groups = Group.where('del_flg = ?', DelFlg::USE)
-      puts @groups
     else
       @disclosureRanges = DisclosureRange.where.not('id = ?', DisclosureRangeList::ADMIN)
       @groups = Group.where(id: GroupRelation.where(account_id:current_account.id)

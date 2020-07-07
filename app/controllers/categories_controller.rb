@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     @category = Category.new
-    @data = Category.all
+    @data = Category.all.order(:del_flg)
   end
 
   def add

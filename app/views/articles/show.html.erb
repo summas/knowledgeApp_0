@@ -1,7 +1,7 @@
 
 <div class="container" style="background:#FFFFFF; padding: 10px;">
 <h2 class="show_title pt-3"><%= @article.title %></h2>
-<% if account_signed_in? %>
+<% if (account_signed_in? && session[:account_groups].include?(@article.group_id)) %>
     <a class="float-right h6 pl-6"href="/article_edits/<%= @article.id %>">この記事を編集する</a>
 <% end %>
 <p class="show_read float-left text-secondary h6 pr-3">

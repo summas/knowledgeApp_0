@@ -32,5 +32,10 @@ end
 module DelFlg
   STOP = 1
   USE = 0
+
+  MATRIX = {
+    1 => '使用停止',
+    0 => '使用中'
+  }.freeze
 end
 
