@@ -1,10 +1,10 @@
 class GroupsController < ApplicationController
   layout 'article'
-  before_action :authenticate_account!, only:[:index,:add,:edit,:delete,:edit]
+  before_action :authenticate_account!, only: [:index, :add, :edit, :delete, :edit]
  
   def index
     @group = Group.new
-    @data = Group.all
+    @data = Group.all.order(:del_flg)
   end
 
   def add
@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
   def restart
     @group = Group.find params[:id]
     if request.patch? then
-      @group.update(del_flg: DelFlg::START)
+      @group.update(del_flg: DelFlg::USE)
       redirect_to '/groups'
     end
   end
