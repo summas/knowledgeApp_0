@@ -1,7 +1,7 @@
 module Auth
-  VIEW = 1
-  EDIT = 3
-  ADMIN = 9
+  VIEW = '1'.freeze
+  EDIT = '3'.freeze
+  ADMIN = '9'.freeze
 
   MATRIX = {
     '1' => '閲覧のみ',
