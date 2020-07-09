@@ -18,19 +18,6 @@ class GroupEditsController < ApplicationController
     end
   end
 
-  def edit
-    # if params[:id].present? then
-    #  @groups = Group.find params[:id]　@groups[obj.group_id.to_s]
-    @groupRelation = GroupRelation.where(account_id:params[:id])
-    if @groupRelation.blank? then
-      @groupRelation = GroupRelation.new
-    end
-    if request.patch? then
-      @groups.update group_params
-      redirect_to '/admins/group_edit'
-    end
-  end
-
   def delete
     @groupRelation = GroupRelation.find params[:g_reration_id]
     @groupRelation.destroy

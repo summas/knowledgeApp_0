@@ -1,58 +1,58 @@
 
-	<% if @is_category %>
-		<span class="h5 pl-4 text-secondary">『<%= @category_name %>』</span>
-	<% end %>
+<% if @is_category %>
+	<span class="h5 pl-4 text-secondary">『<%= @category_name %>』</span>
+<% end %>
 
 <hr>
-	<div id="side">
-		　<span class="text-secondary h6 pl-3">カテゴリー</span>
-		<div class="btn-group-vertical pl-3">
-		<% @categories.all.each do |category| %>
-			<a href="/articles/index/<%= category.id %>/<%= category.name %>/" class="btn btn-secondary"><%= category.name %></a>
-		<% end %>
+<div id="side">
+	　<span class="text-secondary h6 pl-3">カテゴリー</span>
+	<div class="btn-group-vertical pl-3">
+	<% @categories.all.each do |category| %>
+		<a href="/articles/index/<%= category.id %>/<%= category.name %>/" class="btn btn-secondary"><%= category.name %></a>
+	<% end %>
+	</div>
+</div>
+
+<% @data.each do |obj| %>
+	<div class="d-flex rounded m-md-2 w-75" id="article" style="background:#FFFFFF;">
+		<div class="card-body">
+		<% if account_signed_in? %>
+		<div class="d-inline-block w-75">
+			<% end %>
+			<a href="/articles/show/<%= obj.id %>">
+				<span class="float-left pr-3" >
+					<% if obj.image.present? %>
+						<%= image_tag obj.image_url(:thumb) %>
+					<% else %>
+						<%= image_tag 'no-image.png', :size => '100x100' %>
+					<% end %>
+				</span>
+				<h4 class="text-secondary">
+					<% if account_signed_in? %>
+						<span class="h6" ><<%= obj.disclosureRange.name %>></span>:
+					<% end %>
+						<%= obj.title %>
+				</h4>
+			</a>
+			<% if account_signed_in? %>
+			</div>
+			<% end %>
+			<% if account_signed_in? %>
+			<div class="d-inline-block float-right w-25">
+				<p></p>
+			<% end %>
+				<span class="float-right text-secondary pr-3 pt-5" style="font-size:0.6em;">
+				<% if account_signed_in? %>
+					<br>投稿者：<%= obj.account.name %>
+				<% end %>
+					<br>投稿日：<%= obj.created_at.strftime(" %Y.%m.%d") %>
+				</span>
+				<% if account_signed_in? %>
+			</div>
+			<% end %>
 		</div>
 	</div>
-
-	<% @data.each do |obj| %>
-		<div class="d-flex rounded m-md-2 w-75" id="article" style="background:#FFFFFF;">
-			<div class="card-body">
-			<% if account_signed_in? %>
-			<div class="d-inline-block w-75">
-				<% end %>
-				<a href="/articles/show/<%= obj.id %>">
-					<span class="float-left pr-3" >
-						<% if obj.image.present? %>
-							<%= image_tag obj.image_url(:thumb) %>
-						<% else %>
-							<%= image_tag 'no-image.png', :size => '100x100' %>
-						<% end %>
-					</span>
-					<h4 class="text-secondary">
-						<% if account_signed_in? %>
-							<span class="h6" ><<%= obj.disclosureRange.name %>></span>:
-						<% end %>
-							<%= obj.title %>
-					</h4>
-				</a>
-				<% if account_signed_in? %>
-				</div>
-				<% end %>
-				<% if account_signed_in? %>
-				<div class="d-inline-block float-right w-25">
-					<p></p>
-				<% end %>
-					<span class="float-right text-secondary h6 pr-3 pt-3">
-					<% if account_signed_in? %>
-						<br>投稿者：<%= obj.account.name %>
-					<% end %>
-						<br>投稿日：<%= obj.created_at.strftime(" %Y.%m.%d") %>
-					</span>
-					<% if account_signed_in? %>
-				</div>
-				<% end %>
-			</div>
-		</div>
-	<% end %>
+<% end %>
 <div class="navigate">
 	<div><%= paginate @data %></div>
 </div>

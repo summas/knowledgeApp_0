@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     @category = Category.new
-    @data = Category.all
+    @data = Category.all.order(:del_flg)
   end
 
   def add
@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
   def restart
     @category = Category.find params[:id]
     if request.patch? then
-      @category.update(del_flg: DelFlg::START)
+      @category.update(del_flg: DelFlg::USE)
       redirect_to '/categories'
     end
   end
