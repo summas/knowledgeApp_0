@@ -11,4 +11,4 @@ rails webpacker:install
 
 rails action_text:install
 
-rails assets:precompile
+rails assets:precompile RAILS_ENV=production

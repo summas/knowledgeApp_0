@@ -24,7 +24,7 @@
 					<% if obj.image.present? %>
 						<%= image_tag obj.image_url(:thumb) %>
 					<% else %>
-						<%= image_tag 'no-image.png', :size => '100x100' %>
+						<%= image_tag asset_path('no-image.png'), :size => '100x100' %>
 					<% end %>
 				</span>
 				<h4 class="text-secondary">
