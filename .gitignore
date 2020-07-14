@@ -38,3 +38,5 @@ knwldg.code-workspace
 .rubocop_todo.yml
 
 /public/uploads/*
+containers/.DS_Store
+.DS_Store

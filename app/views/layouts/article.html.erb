@@ -17,54 +17,61 @@
 	</head>
 
 	<body class="container" style="background:#f8f8ff;">
-		<nav class="navbar navbar-dark bg-dark navbar-expand-lg mb-4">
-			<a class="navbar-brand" href="/"><%= @articleconfig.title %></a>
-			<% if account_signed_in? %>
-				<a class="navbar-brand" href="/article_edits/add">新規投稿</a>
-				<a class="navbar-brand" href="/article_edits/index">投稿記事一覧</a>
-			<% end %>
-			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav mr-auto">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand " href="/" style="font-size:1.1em;"><%= @articleconfig.title %></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+				<ul class="navbar-nav mr-auto" >　
+					<li class="nav-item">
+						<a class="navbar-brand" href="/article_edits/add" style="font-size:1.1em;">新規投稿</a>
+					</li>
+					<li class="nav-item">
+						<a class="navbar-brand" href="/article_edits/index" style="font-size:1.1em;">投稿記事一覧</a>
+					</li>
 				</ul>
-				<ul class="navbar-nav justify-content-end">
+				<ul class="navbar-nav">
 					<% if account_signed_in? %>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle pt-3 pr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">管理メニュー</a>
-						<div class="dropdown-menu" style="background:#f8f8ff;">
-							 <% if current_account.auth == "9" then%>
-							 <a class="dropdown-item" href="/admins/index/">他のアカウント管理</a>
-							 <a class="dropdown-item" href="/categories/">カテゴリー管理</a>
-							 <a class="dropdown-item" href="/groups/index">グループ管理</a>
-							 <a class="dropdown-item" href="/site_configs/edit">サイト設定</a>
-							<div class="dropdown-divider"></div>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理メニュー</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<% if current_account.auth == "9" then%>
+								<a class="dropdown-item" href="/admins/index/">他のアカウント管理</a>
+								<a class="dropdown-item" href="/categories/">カテゴリー管理</a>
+								<a class="dropdown-item" href="/groups/index">グループ管理</a>
+								<a class="dropdown-item" href="/site_configs/edit">サイト設定</a>
+								<div class="dropdown-divider"></div>
 							<% end %>
-							<a class="dropdown-item" href="/accounts/edit/">アカウント情報変更</a>
-							<a class="dropdown-item btn btn-secondary" rel="nofollow" data-method="delete" href="/accounts/sign_out">ログアウト</a>
-						</div>
-					</li>
-					<li class="nav-item pr-3">
-						<% if current_account.aicon.present? %>
-								<%= image_tag current_account.aicon_url(:aicon), class: 'rounded-circle' %>
-						<% else %>
-							<%= image_tag 'no-image.png', :size => '60x60', class: 'rounded-circle' %>
-						<% end %>
-					
-					</li>
+								<a class="dropdown-item" href="/accounts/edit/">アカウント情報変更</a>
+								<a class="dropdown-item btn btn-secondary" rel="nofollow" data-method="delete" href="/accounts/sign_out">ログアウト</a>
+							</div>
+						</li>
+						<li class="nav-item pr-3">
+							<% if current_account.aicon.present? %>
+									<%= image_tag current_account.aicon_url(:aicon), :size => '40x40', class: 'rounded-circle' %>
+							<% else %>
+								<%= image_tag 'no-image.png', :size => '40x40', class: 'rounded-circle' %>
+							<% end %>
+						</li>
+					<% else %>
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle pt-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ログイン</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item btn btn-secondary"  rel="nofollow" data-method="post" href="/testsessions">かんたんログイン</a>	
+							<a class="dropdown-item btn btn-secondary" href="/accounts/sign_in">ログイン</a>	
+							</div>
+						</li>
 					<% end %>
-						<% if !account_signed_in? %>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle pt-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ログイン</a>
-								<div class="dropdown-menu" style="background:#f8f8ff;">
-									<a class="dropdown-item btn btn-secondary"  rel="nofollow" data-method="post" href="/testsessions">かんたんログイン</a>	
-									<a class="dropdown-item btn btn-secondary" href="/accounts/sign_in">ログイン</a>	
-								</div>
-							</li>
-						<% end %>
 				</ul>
+
+				</div>
 			</div>
 		</nav>
 			<% if account_signed_in? %>
-				<div class="float-right text-default h6">
+				<div class="float-right text-default h6 pt-3">
 					ログインアカウント：<%= current_account.name %><br>
 					権限：<%= Auth::MATRIX[current_account.auth] %>	
 				</div><br>
