@@ -1,3 +1,4 @@
+<div class="container mx-auto pt-3 mt-5" style="background:#FFFFFF; width: 360px;">
 <h2>アカウント追加</h2>
 <%= form_for(@editAccount, url:{controller:'admins', action:'add'}) do |form| %>
 <table>
@@ -11,8 +12,9 @@
 	</div>
 	<div class="form-group">
 	  <label for="auth">権限</label>
-	  <%= form.select :auth, AuthSelect::ADMIN %> 
+	  <%= form.select :auth, AuthSelect::ADMIN, {}, {class:"form-control w-25"}  %> 
 	</div>
+
     <div class="form-group">
 	  <label for="email">Eメールアドレス</label>
 	  <%= form.email_field :email, {class:"form-control"} %>
@@ -36,8 +38,9 @@
     <% end %>
   　</div>
 
-	<%= form.submit "送信" %>
+	<%= form.submit "登録" %>
 
 </table>
 	<% end %>
 <p><a href="/admins/index">戻る</a></p>
+</div>
