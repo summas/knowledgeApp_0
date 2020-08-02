@@ -1,3 +1,4 @@
+<div class="container mx-auto pt-3 mt-5" style="background:#FFFFFF; width: 360px;">
 <h2>アカウント追加</h2>
 <%= form_for(@editAccount, url:{controller:'admins', action:'add'}) do |form| %>
 <table>
@@ -11,15 +12,16 @@
 	</div>
 	<div class="form-group">
 	  <label for="auth">権限</label>
-	  <%= form.select :auth, AuthSelect::ADMIN %> 
+	  <%= form.select :auth, AuthSelect::ADMIN, {}, {class:"form-control w-25"}  %> 
 	</div>
+
     <div class="form-group">
 	  <label for="email">Eメールアドレス</label>
 	  <%= form.email_field :email, {class:"form-control"} %>
 	</div>
 
     <div class="form-group">
-	  <label for="password">新パスワード</label>
+	  <label for="password">パスワード</label>
 	  <%= form.password_field :password, {class:"form-control"} %>
     <% if @minimum_password_length %>
       <br />
@@ -28,7 +30,7 @@
   　</div>
 
     <div class="form-group">
-	  <label for="password_confirmation">新パスワード</label>
+	  <label for="password_confirmation">パスワード</label>
 	  <%= form.password_field :password_confirmation, {class:"form-control"} %>
     <% if @minimum_password_length %>
       <br />
@@ -36,8 +38,9 @@
     <% end %>
   　</div>
 
-	<%= form.submit "送信" %>
+	<%= form.submit "登録" %>
 
 </table>
 	<% end %>
 <p><a href="/admins/index">戻る</a></p>
+</div>
