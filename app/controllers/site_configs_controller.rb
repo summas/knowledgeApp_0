@@ -8,9 +8,7 @@ class SiteConfigsController < ApplicationController
 
   def edit
     @articleconfig = SiteConfig.find 1
-    if request.patch? then
-      @articleconfig.update siteconfig_params
-    end
+    @articleconfig.update siteconfig_params if request.patch?
   end
 
   private

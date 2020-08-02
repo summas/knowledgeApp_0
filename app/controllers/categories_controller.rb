@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   layout 'article'
-  before_action :authenticate_account!, only:[:index,:add,:edit,:delete,:edit]
+  before_action :authenticate_account!, only: [:index, :add, :edit, :delete, :edit]
 
   def index
     @category = Category.new

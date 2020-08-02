@@ -38,4 +38,3 @@ module DelFlg
     0 => '使用中'
   }.freeze
 end
-
