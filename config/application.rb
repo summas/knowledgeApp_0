@@ -36,7 +36,5 @@ module KnowledgeApp
 
     config.hosts << 'knwldg.xyz'
     config.hosts << 'localhost'
-
-    config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'http://localhost:3000')
   end
 end
