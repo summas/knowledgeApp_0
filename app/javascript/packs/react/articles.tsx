@@ -2,9 +2,10 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-import React from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import HOST from '../appconf';
 
 var target_dom = null;
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getData(f) {
-  let url = "http://localhost:3000/articles/ajax";
+  let url = HOST + '/articles/ajax';
   if (f != '') {
     url += "?name=" + f;
   }
@@ -43,13 +44,14 @@ function getData(f) {
               <div className="card-body">
                 <a href={str}>
                   <span className="float-left pr-3" >
-                    <img src={val.image.url} width="100" height="100" /></span>
+                    <img src={val.image.url} width="100" height="100" />
+                  </span>
                   <h3 className="text-secondary">{val.title}</h3>
                 </a>
                 <span className="float-right text-secondary h6 pr-3 pt-3">
                   投稿日: {date.toLocaleDateString()}
                 </span>
-              </div></div>);
+              </div></div >);
         }
         const el = (
           <div>{arr}</div>
