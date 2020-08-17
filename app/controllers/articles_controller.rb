@@ -65,6 +65,11 @@ class ArticlesController < ApplicationController
 		@article = Article.find params[:id]
   end
 
+  def article
+    @article = Article.find params[:id]              
+    render plain:@article.to_json 
+  end
+  
   def react; end
 
   def ajax

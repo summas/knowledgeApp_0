@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   get 'reacts/index'
+  get 'reacts/show'
+  get 'reacts/article'
+  get 'reacts/article/:id', to: 'reacts#article'
   get 'reacts/ajax'
+  get 'reacts/category'
 
   devise_for :accounts, controllers: {
     sessions: 'accounts/sessions',

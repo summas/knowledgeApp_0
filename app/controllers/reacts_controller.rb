@@ -1,5 +1,18 @@
 class ReactsController < ApplicationController
+  layout 'article'
+
   def index
+  end
+
+  def show
+  end
+
+  def article
+     @article = Article.find params[:id]        
+    # @article = Article.select(:content).where(id: params[:id])
+    content = {params[:id] => @article.content.to_s}
+    # @content["content"] = @article.content.to_s
+    render plain:content.to_json
   end
 
   def ajax
@@ -33,5 +46,11 @@ class ReactsController < ApplicationController
                     .order('created_at desc')                   
     end
     render plain:@data.to_json 
-    end
+  end
+
+  def category
+    @category = Category.all.order(:del_flg)
+    render plain:@category.to_json 
+  end
+
 end

@@ -1,0 +1,27 @@
+[
+    {
+        "id": 31,
+        "title": "テst",
+        "content": {
+            "id": 30,
+            "name": "content",
+            "body": "<div>テst<br><action-text-attachment sgid=\"BAh7CEkiCGdpZAY6BkVUSSI6Z2lkOi8va25vd2xlZGdlLWFwcC9BY3RpdmVTdG9yYWdlOjpCbG9iLzE4P2V4cGlyZXNfaW4GOwBUSSIMcHVycG9zZQY7AFRJIg9hdHRhY2hhYmxlBjsAVEkiD2V4cGlyZXNfYXQGOwBUMA==--ac2fc2bc549ecf8af01a3cdee500355224ba931b\" content-type=\"image/jpeg\" url=\"http://localhost/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBGdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c7dbdce5aa1dfdd03d6450841cced6fd5372f6d8/F100011296.jpg\" filename=\"F100011296.jpg\" filesize=\"21898\" width=\"345\" height=\"230\" previewable=\"true\" presentation=\"gallery\"></action-text-attachment></div>",
+            "record_type": "Article",
+            "record_id": 31,
+            "created_at": "2020-07-28T19:57:31.905+09:00",
+            "updated_at": "2020-07-28T20:34:24.096+09:00"
+        },
+        "category_id": 1,
+        "group_id": 1,
+        "account_id": 6,
+        "created_at": "2020-07-28T19:57:31.886+09:00",
+        "updated_at": "2020-07-28T20:34:35.468+09:00",
+        "disclosureRange_id": "1",
+        "image": {
+            "url": "/uploads/article/image/31/F100011296.jpg",
+            "thumb": {
+                "url": "/uploads/article/image/31/thumb_F100011296.jpg"
+            }
+        }
+    }
+]
