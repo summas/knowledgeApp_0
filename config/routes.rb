@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
 
-  devise_for :accounts, controllers: { registrations: 'accounts/registrations' }
+  get 'reacts/index'
+  get 'reacts/show'
+  get 'reacts/article'
+  get 'reacts/article/:id', to: 'reacts#article'
+  get 'reacts/ajax'
+  get 'reacts/category'
+
+  devise_for :accounts, controllers: {
+    sessions: 'accounts/sessions',
+    passwords: 'accounts/passwords',
+    registrations: 'accounts/registrations',
+    confirmations: 'accounts/confirmations'
+  }
 
   root 'articles#index'
 
