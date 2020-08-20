@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
     if !params[:id] then
       @data = Article.where(disclosureRange_id: disclosureRanges)
                      .where(group_id: groups)
-                     .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC))
+                     .where(disclosureRange_id: DisclosureRangeList::PUBLIC)
                      .order('created_at desc')
                      .page params[:page]
     else
@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
       @data = Article.where(disclosureRange_id: disclosureRanges)
                     .where(group_id: groups)
                     .where('category_id = ?', params[:id])
-                    .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC))
+                    .where(disclosureRange_id: DisclosureRangeList::PUBLIC)
                     .order('created_at desc')
                     .page params[:page]
     end
