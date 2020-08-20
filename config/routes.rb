@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'reacts/article'
   get 'reacts/article/:id', to: 'reacts#article'
   get 'reacts/ajax'
+  get 'reacts/ajax/:id', to: 'reacts#ajax'
   get 'reacts/category'
 
   devise_for :accounts, controllers: {
