@@ -14,10 +14,11 @@ import { Omit } from '@material-ui/types';
 
 import { useDispatch } from "react-redux";
 
-import { fetchAsyncGetDaily } from "./article/articleSlice";
+import { fetchAsyncGetArticles } from "./article/articleSlice";
 import { fetchAsyncGetCategory } from "./category/categorySlice";
 import Articles from "./article/Articles";
 import Category from "./category/Category";
+import Catename from "./catename/Catename";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -60,7 +61,7 @@ const Index: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchAsyncGetDaily(""));
+        dispatch(fetchAsyncGetArticles(""));
     }, [dispatch]);
 
     useEffect(() => {
@@ -70,6 +71,7 @@ const Index: React.FC = () => {
     return (
         <div>
             <Container className={classes.content}>
+                <Catename />
                 <Grid container spacing={0}>
                     <Grid item xs={12} md={9}>
                         <Articles />

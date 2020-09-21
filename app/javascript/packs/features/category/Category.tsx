@@ -9,8 +9,10 @@ import Divider from '@material-ui/core/Divider';
 import { MemoryRouter } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import { selectCategories } from "./categorySlice";
-import { fetchAsyncGetDaily } from "../article/articleSlice";
+import { fetchAsyncSetCateName } from "../catename/cateNameSlice";
+import { fetchAsyncGetArticles } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,15 +21,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const chgCategory = (category_id: String, dispatch: any) => {
-  dispatch(fetchAsyncSetPage(1))
-  dispatch(fetchAsyncGetDaily(String(category_id)))
-}
 
 const Category: React.FC = () => {
   const classes = useStyles();
   const categories = useSelector(selectCategories);
   const dispatch = useDispatch();
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const chgCategory = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number,
+    category_id: String,
+    category_name: String,
+    dispatch: any) => {
+    setSelectedIndex(index);
+    dispatch(fetchAsyncSetPage(1))
+    dispatch(fetchAsyncGetArticles(String(category_id)))
+    dispatch(fetchAsyncSetCateName(category_name))
+  }
 
   return (
     <MemoryRouter initialEntries={['/drafts']} initialIndex={0} >
@@ -35,7 +46,7 @@ const Category: React.FC = () => {
         <Paper elevation={0}>
           <ListItem
             button
-            onClick={(event) => chgCategory("", dispatch)}
+            onClick={(event) => chgCategory(event, 0, "", "", dispatch)}
           >
             <ListItemText primary="カテゴリ" />
           </ListItem>
@@ -44,8 +55,10 @@ const Category: React.FC = () => {
             {categories.map((category) => (
               <ListItem
                 button
-                onClick={(event) => chgCategory(String(category.id), dispatch)}
+                selected={selectedIndex === category.id}
+                onClick={(event) => chgCategory(event, category.id, String(category.id), category.name, dispatch)}
               >
+                <FiberManualRecordIcon fontSize="inherit" />
                 <ListItemText primary={category.name} />
               </ListItem>
             ))}
