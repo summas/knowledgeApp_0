@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ナレッジサイト</title>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <%= stylesheet_link_tag 'articles', media: 'all', 
+			'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'actiontext', media: 'all', 
+			'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 
+			'data-turbolinks-track': 'reload' %>
+</head>
+
+
+<body class="container" style="background:#f8f8ff; max-width: 1342px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand " href="/" style="font-size:1.1em;"><%= @articleconfig.title %></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+                <ul class="navbar-nav mr-auto">　
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="/article_edits/add" style="font-size:1.1em;">新規投稿</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="/article_edits/index" style="font-size:1.1em;">投稿記事一覧</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <% if account_signed_in? %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理メニュー</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <% if current_account.auth == "9" then%>
+                            <a class="dropdown-item" href="/admins/index/">他のアカウント管理</a>
+                            <a class="dropdown-item" href="/categories/">カテゴリー管理</a>
+                            <a class="dropdown-item" href="/groups/index">グループ管理</a>
+                            <a class="dropdown-item" href="/site_configs/edit">サイト設定</a>
+                            <div class="dropdown-divider"></div>
+                            <% end %>
+                            <a class="dropdown-item" href="/accounts/edit/">アカウント情報変更</a>
+                            <a class="dropdown-item btn btn-secondary" rel="nofollow" data-method="delete" href="/accounts/sign_out">ログアウト</a>
+                        </div>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <% if current_account.aicon.present? %>
+                        <%= image_tag current_account.aicon_url(:aicon), :size => '40x40', class: 'rounded-circle' %>
+                        <% else %>
+                        <%= image_tag 'no-image.png', :size => '40x40', class: 'rounded-circle' %>
+                        <% end %>
+                    </li>
+                    <% else %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle pt-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ログイン</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item btn btn-secondary" rel="nofollow" data-method="post" href="/testsessions">かんたんログイン</a>
+                            <a class="dropdown-item btn btn-secondary" href="/accounts/sign_in">ログイン</a>
+                        </div>
+                    </li>
+                    <% end %>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <% if account_signed_in? %>
+    <div class="float-right text-default h6 pt-3">
+        ログインアカウント：<%= current_account.name %><br>
+        権限：<%= Auth::MATRIX[current_account.auth] %>
+    </div><br>
+    <% end %> <br>
+    <%= yield %>
+    <div class="mt-5 text-center small text-scondary border-top border-scondary">
+        2020 ナレッジサイト
+    </div>
+</body>
+
+</html>

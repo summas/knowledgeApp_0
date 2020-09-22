@@ -9,17 +9,19 @@ type ARTICLE = typeof article;
 
 type articleState = {
     article: ARTICLE;
+    category_id: String
 };
 
 const initialState: articleState = {
-    article: article
+    article: article,
+    category_id: "",
 };
 
 export const fetchAsyncGetDaily = createAsyncThunk(
     "article/getArticle",
-    async () => {
-        const { data } = await axios.get<ARTICLE>(`${HOST}/${apiUrl}`);
-        return { data: data };
+    async (category_id: String) => {
+        const { data } = await axios.get<ARTICLE>(`${HOST}/${apiUrl}/${category_id}`);
+        return { data: data, category_id: category_id };
     }
 );
 
