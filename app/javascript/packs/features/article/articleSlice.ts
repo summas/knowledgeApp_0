@@ -17,7 +17,7 @@ const initialState: articleState = {
     category_id: "",
 };
 
-export const fetchAsyncGetDaily = createAsyncThunk(
+export const fetchAsyncGetArticles = createAsyncThunk(
     "article/getArticle",
     async (category_id: String) => {
         const { data } = await axios.get<ARTICLE>(`${HOST}/${apiUrl}/${category_id}`);
@@ -30,7 +30,7 @@ const articleSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchAsyncGetDaily.fulfilled, (state, action) => {
+        builder.addCase(fetchAsyncGetArticles.fulfilled, (state, action) => {
             return {
                 ...state,
                 article: action.payload.data

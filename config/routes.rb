@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'reacts/index'
-  get 'reacts/show'
-  get 'reacts/article'
-  get 'reacts/article/:id', to: 'reacts#article'
-  get 'reacts/ajax'
-  get 'reacts/ajax/:id', to: 'reacts#ajax'
-  get 'reacts/category'
-
   devise_for :accounts, controllers: {
     sessions: 'accounts/sessions',
     passwords: 'accounts/passwords',
@@ -15,7 +7,12 @@ Rails.application.routes.draw do
     confirmations: 'accounts/confirmations'
   }
 
-  root 'articles#index'
+  root 'reacts#index'
+  get 'reacts/article/:id', to: 'reacts#index'
+  get 'reacts/index'
+  get 'reacts/ajax'
+  get 'reacts/ajax/:id', to: 'reacts#ajax'
+  get 'reacts/category'
 
   get 'group_edits/index'
   get 'group_edits/index/:id', to: 'group_edits#index'

@@ -4,7 +4,7 @@ import HOST from './appconf';
 
 const apiUrl = `${HOST}/articles/ajax`
 
-export const fetchAsyncGetDaily = createAsyncThunk(
+export const fetchAsyncGetArticles = createAsyncThunk(
   "article/getArticles",
   async () => {
     const { data } = await axios.get(`${apiUrl}`);
