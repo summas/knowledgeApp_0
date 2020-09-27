@@ -27,7 +27,7 @@ class ArticleEditsController < ApplicationController
 
     if request.post? then
       @article = Article.create articles_params
-      redirect_to '/articles/index'
+      redirect_to '/'
     end
   end
 
@@ -47,7 +47,7 @@ class ArticleEditsController < ApplicationController
     @categories_select = Category.where('del_flg = ?', DelFlg::USE)
     if request.patch? then
       @article.update articles_params
-      redirect_to '/articles'
+      redirect_to '/'
     end
   end
 
@@ -55,7 +55,7 @@ class ArticleEditsController < ApplicationController
     @article = Article.find params[:id]
     if request.post? then
       @article.destroy
-      redirect_to '/articles'
+      redirect_to '/'
     end
   end
 
