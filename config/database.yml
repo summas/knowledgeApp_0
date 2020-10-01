@@ -53,3 +53,4 @@ production:
   database: knowledgeApp_production
   username: knowledgeApp
   password: <%= ENV['KNOWLEDGEAPP_DATABASE_PASSWORD'] %>
+
