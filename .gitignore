@@ -23,7 +23,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/database.yml
+
 /public/packs
 /public/packs-test
 /node_modules
@@ -41,4 +41,3 @@ knwldg.code-workspace
 containers/.DS_Store
 .DS_Store
 
-/app/javascript/packs/appconf.ts
