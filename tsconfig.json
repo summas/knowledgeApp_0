@@ -13,7 +13,6 @@
     "target": "es5",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
   },
   "exclude": [
     "**/*.spec.ts",
