@@ -1,18 +1,28 @@
-<h1 class="display-4 text-primary">
-Articles#delete</h1>
-<p>※以下を削除してもいいですか？</p>
+<p>※以下の記事を削除してもいいですか？</p>
 <table class="table">
-	<tr><th>ID</th>
-		<td><%= @article.id %></td></tr>
-	<tr><th>タイトル</th>
-		<td><%= @article.title %></td></tr>
-	<tr><th>投稿者</th>
-		<td><%= @article.account.name %></td></tr>
-	<tr><th>記事</th>
-		<td><%= @article.content %></td></tr>
+    <tr>
+        <th>ID：</th>
+        <td><%= @article.id %></td>
+    </tr>
+    <tr>
+        <th>タイトル：</th>
+        <td><%= @article.title %></td>
+    </tr>
+    <tr>
+        <th>投稿者：</th>
+        <td><%= @article.account.name %></td>
+    </tr>
+    <tr>
+        <th>記事：</th>
+        <td><%= @article.content %></td>
+    </tr>
 </table>
 <%= form_tag controller: "article_edits", action: "delete" do %>
-	<%= hidden_field_tag "id", {value: @article.id} %>
-	<%= submit_tag "削除する" %>
+<%= hidden_field_tag "id", {value: @article.id} %>
+<hr>
+<div class="text-center pb-3 pt-1">
+    <%= submit_tag "削除する", class: "btn btn-secondary" %>
+</div>
+
 <% end %>
-<p><a href="/article_edits/index/">記事一覧</a></p>
+<p><a href="/article_edits/index/">投稿記事一覧</a></p>
