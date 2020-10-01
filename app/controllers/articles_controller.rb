@@ -37,39 +37,10 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def add
-    @article = Article.new
-    if request.post? then
-      @article = Article.create articles_params
-      redirect_to '/articles/index'
-    end
-  end
-
-  def edit
-    @article = Article.find params[:id]
-    if request.patch? then
-      @article.update articles_params
-      redirect_to '/articles'
-    end
-  end
-
-  def delete
-    @article = Article.find params[:id]
-    if request.post? then
-      @article.destroy
-      redirect_to '/articles'
-    end
-  end
-
   def show
 		@article = Article.find params[:id]
   end
 
-  def article
-    @article = Article.find params[:id]              
-    render plain:@article.to_json 
-  end
-  
   def react; end
 
   def ajax
