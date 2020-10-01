@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from "./index.module.css";
 import HOST from '../../appconf';
 import { Card, CardContent, Typography, Grid, CardActionArea, Link } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
@@ -10,6 +9,7 @@ import { selectArticles } from "./articleSlice";
 import { selectPage, fetchAsyncSetPage } from "./pageSlice";
 import Pagination from '@material-ui/lab/Pagination';
 
+const styles = require('./index.module')
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +43,7 @@ let getArticle = (val: any) => {
           <Link href={`${HOST}/${str}`} >
             <Grid container spacing={2} direction="row" justify="flex-end">
               <Grid item>
-                <img src={`${HOST}/${val.image.url}`} width="150" height="120" />
+                <img src={`${val.image.url}`} width="150" height="120" />
               </Grid>
               <Grid item xs container direction="column" spacing={0}>
                 <Grid item>
