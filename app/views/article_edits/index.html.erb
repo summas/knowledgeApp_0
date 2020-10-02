@@ -1,28 +1,34 @@
-<p>※『<%= current_account.name %>』の投稿記事一覧</p>
-
-<div class="container table-scroll">	
-	<table class="table table-bordered w-100" style="background:#FFFFFF; font-size:0.8em;" >
-		<thead class="thead-light">
-			<tr>
-				<th>ID</th><th>タイトル</th><th>投稿者</th><th class="w-15">カテゴリー</th><th>グループ</th><th>公開範囲</th><th></th><th></th>
-			</tr>
-		</thead>
-		<% @data.each do |obj| %>
-		<tr>
-			<td><span style=""><%= obj.id %></td></span>
-			<td><a href="/articles/show/<%= obj.id %>"><%= obj.title %></a></td>
-			<td><%= obj.account.name %></td>
-			<td><%= obj.category.name %></td>
-			<td><%= obj.group.name %></td>
-			<td><%= obj.disclosureRange.name %></td>
-			<td><a href="/article_edits/<%= obj.id %>">編集</a></td>
-			<td><a href="/article_edits/delete/<%= obj.id %>">削除</a></td>
-		</tr>
-		<% end %>
-	</table>
-	<div class="navigate">
-		<div><%= paginate @data %></div>
-	</div>
+<div class="container table-scroll">
+    <p>※『<%= current_account.name %>』の投稿記事一覧</p>
+    <table class="table table-bordered w-100" style="background:#FFFFFF; font-size:0.8em;">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>投稿者</th>
+                <th class="w-15">カテゴリー</th>
+                <th>グループ</th>
+                <th>公開範囲</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <% @data.each do |obj| %>
+        <tr>
+            <td><span style=""><%= obj.id %></td></span>
+            <td><a href="/articles/show/<%= obj.id %>"><%= obj.title %></a></td>
+            <td><%= obj.account.name %></td>
+            <td><%= obj.category.name %></td>
+            <td><%= obj.group.name %></td>
+            <td><%= obj.disclosureRange.name %></td>
+            <td><a href="/article_edits/<%= obj.id %>">編集</a></td>
+            <td><a href="/article_edits/delete/<%= obj.id %>">削除</a></td>
+        </tr>
+        <% end %>
+    </table>
+    <div class="navigate">
+        <div><%= paginate @data %></div>
+    </div>
+    <br />
+    <p><%= link_to '戻る', 'javascript:history.back()' %></p>
 </div>
-
-<p><a href="/">戻る</a></p>
