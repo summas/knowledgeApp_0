@@ -1,10 +1,10 @@
  README
  
  
-#AWS構成図
+# AWS構成図
 ***
 
-
+![PF diagram](https://user-images.githubusercontent.com/52375299/94989674-8134bf00-05b1-11eb-9b4d-18ffd1bbd902.PNG)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
