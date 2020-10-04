@@ -11,7 +11,6 @@
 - テスト機能(RSpec)
 
 #  使用技術
-***
 #### サーバーサイド
 - Ruby 2.6.3
 - Rails 6.0.2.2
@@ -32,11 +31,9 @@
 - Route53
 
 # AWS構成図
-***
 
 ![PF diagram](https://user-images.githubusercontent.com/52375299/94989674-8134bf00-05b1-11eb-9b4d-18ffd1bbd902.PNG)
 
 # 開発環境
-***
 - macOS Catalina 10.15.6
 - Docker(nginx, rails, mysql)
