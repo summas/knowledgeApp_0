@@ -1,4 +1,5 @@
- README
+README.md
+***
 # 機能一覧
 - 記事投稿機能(Action Text)
 - 記事詳細表示機能
@@ -39,5 +40,5 @@
 
 # 開発環境
 ***
-macOS Catalina 10.15.6
-Docker(nginx, rails, mysql)
+- macOS Catalina 10.15.6
+- Docker(nginx, rails, mysql)
