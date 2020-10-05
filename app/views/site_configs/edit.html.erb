@@ -1,22 +1,24 @@
-<div class="container" style="background:#FFFFFF; width:400px; padding: 10px;">	
-	<p>サイトの設定</p>
-	<% if @articleconfig.errors.any? %>
-	<ul>
-		<% @articleconfig.errors.full_messages.each do |err| %>
-			<li><%= err %></li>
-		<% end %>
-	</ul>
-	<% end %>
-	<%= form_for(@articleconfig, url:{controller:'site_configs', action:'edit'}) do |form| %>
-		<table>
-			<tr><th>タイトル：</th>
-				<td><%= form.text_field :title %></td></tr>
-		</table>
-	<div class="text-center">
-		<%= form.submit "更新" %></td>
-	</div>
-	<% end %>
+<div class="container" style="background:#FFFFFF; width:400px; padding: 10px;">
+    <p>サイトの設定</p>
+    <% if @articleconfig.errors.any? %>
+    <ul>
+        <% @articleconfig.errors.full_messages.each do |err| %>
+        <li><%= err %></li>
+        <% end %>
+    </ul>
+    <% end %>
+    <%= form_for(@articleconfig, url:{controller:'site_configs', action:'edit'}) do |form| %>
+    <table>
+        <tr>
+            <th>タイトル：</th>
+            <td><%= form.text_field :title %></td>
+        </tr>
+    </table>
+    <div class="text-center">
+        <%= form.submit "更新" %></td>
+    </div>
+    <% end %>
 </div>
 <div class="text-center">
-	<p><%= link_to :back do %>戻る<% end %></p>
+    <p><a href="javascript:window.location.href = '/';">記事一覧</a></p>
 </div>

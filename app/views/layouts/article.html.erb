@@ -18,14 +18,9 @@
 </head>
 
 <body class="container" style="background:#ffffff; max-width: 1280px;">
-    <script type="text/javascript">
-        function getHome() {
-            window.location.href = '/';
-        }
-    </script>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand " href="javascript:getHome();" style="font-size:1.1em;"><%= @articleconfig.title %></a>
+            <a class="navbar-brand " href="javascript:window.location.href = '/';" style="font-size:1.1em;"><%= @articleconfig.title %></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
