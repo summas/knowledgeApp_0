@@ -1,44 +1,47 @@
 <div class="container" style="background:#FFFFFF; width: 440px; padding: 10px;">
-<h4 class="pt-3">
-グループ管理画面</h4>
-<span class="h6">※グループ一覧</span>
-<table class="table table-bordered h6" style="background:#FFFFFF;">
-	<thead class="thead-light">
-		<tr>
-			<th>グループ名</th><th width="60">編集</th><th width="90">状態</th><th width="90">処理</th>
-		</tr>
-	</thead>
-	<% @data.each do |obj| %>
-	<tr>
-		<td><%= obj.name %></td>
-		<td><a href="/groups/edit/<%= obj.id %>">編集</a></td>
-		<td><%= DelFlg::MATRIX[obj.del_flg] %></td>
-		<% if !(obj.del_flg == DelFlg::STOP) %> 
-			<td><%= link_to "使用停止", "/groups/stop/#{obj.id}", method: :patch, data: {confirm: "本当にグループ「#{obj.name}」を使用停止にしますか？"} %></td>
-		<% else %>	
-			<td><%= link_to "使用再開", "/groups/restart/#{obj.id}", method: :patch, data: {confirm: "本当にグループ「#{obj.name}」の使用を再開しますか？"} %></td>
-		<% end %>	
-	</tr>
-	<% end %>
-</table>
-<span class="h6">※使用停止にすると記事の登録や編集で該当グループは選択できなくなります。</span>
-</div> 
+    <h4 class="pt-3">
+        グループ管理画面</h4>
+    <span class="h6">※グループ一覧</span>
+    <table class="table table-bordered h6" style="background:#FFFFFF;">
+        <thead class="thead-light">
+            <tr>
+                <th>グループ名</th>
+                <th width="60">編集</th>
+                <th width="90">状態</th>
+                <th width="90">処理</th>
+            </tr>
+        </thead>
+        <% @data.each do |obj| %>
+        <tr>
+            <td><%= obj.name %></td>
+            <td><a href="/groups/edit/<%= obj.id %>">編集</a></td>
+            <td><%= DelFlg::MATRIX[obj.del_flg] %></td>
+            <% if !(obj.del_flg == DelFlg::STOP) %>
+            <td><%= link_to "使用停止", "/groups/stop/#{obj.id}", method: :patch, data: {confirm: "本当にグループ「#{obj.name}」を使用停止にしますか？"} %></td>
+            <% else %>
+            <td><%= link_to "使用再開", "/groups/restart/#{obj.id}", method: :patch, data: {confirm: "本当にグループ「#{obj.name}」の使用を再開しますか？"} %></td>
+            <% end %>
+        </tr>
+        <% end %>
+    </table>
+    <span class="h6">※使用停止にすると記事の登録や編集で該当グループは選択できなくなります。</span>
+</div>
 <br>
-<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">	
-<p>※新しいグループの登録</p>
+<div class="container" style="background:#FFFFFF; width: 400px; padding: 10px;">
+    <p>※新しいグループの登録</p>
 
-<%= form_for(@group, url:{controller:'groups', action:'add'}) do |form| %>
-<table>
-    <div class="form-group">
-		<td>グループ名：</td>
-		<td><%= form.text_field :name, {class:"form-control"} %></td>
-	</div>
-</table>
-	<div class="text-center">
-	<%= form.submit "登録" %>
-		<% end %>
-	</div>
-</div> 
+    <%= form_for(@group, url:{controller:'groups', action:'add'}) do |form| %>
+    <table>
+        <div class="form-group">
+            <td>グループ名：</td>
+            <td><%= form.text_field :name, {class:"form-control"} %></td>
+        </div>
+    </table>
+    <div class="text-center">
+        <%= form.submit "登録" %>
+        <% end %>
+    </div>
+</div>
 <div class="text-center">
-	<p><a href="/">戻る</a></p>
+    <a class="navbar-brand " href="javascript:window.location.href = '/';">記事一覧</a>
 </div>

@@ -1,34 +1,41 @@
 <h2 class="display-6 text-secondary">
-アカウント一覧</h2>
+    アカウント一覧</h2>
 <p><a href="/admins/add">新規登録</a></p>
-	<div style="overflow-x: scroll;">	
-		<table class="table table-bordered" style="background:#FFFFFF; font-size:0.6em;">
-		<thead class="thead-light">
-			<tr>
-				<th>ID</th><th>投稿者</th><th>権限</th><th>所属組織</th><th>Eメール</th><th>登録日</th><th>更新日</th><th>各種編集</th>
-			</tr>
-		</thead>
-			<% @accounts.each do |obj| %>
-			<tr>
-				<td><%= obj.id %></td>
-				<td><%= obj.name %></td>
-				<td><%= @auths[obj.auth] %></td>
-				<td><%= obj.organization %></td>
-				<td><%= obj.email %></td>
-				<td><%= obj.created_at.strftime(" %Y.%m.%d %a %H:%M") %></td>
-				<td><%= obj.updated_at.strftime(" %Y.%m.%d %a %H:%M") %></td>
-				<td>
-					<div class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-secondary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">編集項目</a>
-						<div class="dropdown-menu" style="background:#f8f8ff;">
-							<a class="dropdown-item" href="/admins/edit/<%= obj.id %>">ユーザー情報編集</a>
-							<a class="dropdown-item" href="/admins/groupEdit/<%= obj.id %>">グループ編集</a>
-							<%= link_to "削除", "/admins/delete/#{obj.id}",{method: :delete, data: {confirm: "本当にこのアカウントを削除しますか？"}, class: "dropdown-item"} %>
-						</div>
-					</div>
-				</td>
-			</tr>
-			<% end %>
-		</table>
-	</div>
-<p><%= link_to :back do %>戻る<% end %></p>
+<div style="overflow-x: scroll;">
+    <table class="table table-bordered" style="background:#FFFFFF; font-size:0.6em;">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>投稿者</th>
+                <th>権限</th>
+                <th>所属組織</th>
+                <th>Eメール</th>
+                <th>登録日</th>
+                <th>更新日</th>
+                <th>各種編集</th>
+            </tr>
+        </thead>
+        <% @accounts.each do |obj| %>
+        <tr>
+            <td><%= obj.id %></td>
+            <td><%= obj.name %></td>
+            <td><%= @auths[obj.auth] %></td>
+            <td><%= obj.organization %></td>
+            <td><%= obj.email %></td>
+            <td><%= obj.created_at.strftime(" %Y.%m.%d %a %H:%M") %></td>
+            <td><%= obj.updated_at.strftime(" %Y.%m.%d %a %H:%M") %></td>
+            <td>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-secondary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">編集項目</a>
+                    <div class="dropdown-menu" style="background:#f8f8ff;">
+                        <a class="dropdown-item" href="/admins/edit/<%= obj.id %>">ユーザー情報編集</a>
+                        <a class="dropdown-item" href="/admins/groupEdit/<%= obj.id %>">グループ編集</a>
+                        <%= link_to "削除", "/admins/delete/#{obj.id}",{method: :delete, data: {confirm: "本当にこのアカウントを削除しますか？"}, class: "dropdown-item"} %>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+<a class="navbar-brand " href="javascript:window.location.href = '/';">記事一覧</a>
