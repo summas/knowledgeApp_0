@@ -6,14 +6,7 @@ import {
     Grid,
 } from "@material-ui/core";
 
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
-import { Omit } from '@material-ui/types';
-
 import { useDispatch } from "react-redux";
-
 import { fetchAsyncGetArticles } from "./article/articleSlice";
 import { fetchAsyncGetCategory } from "./category/categorySlice";
 import Articles from "./article/Articles";
@@ -28,33 +21,6 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 0,
     },
 }));
-
-interface ListItemLinkProps {
-    icon?: React.ReactElement;
-    primary: string;
-    to: string;
-}
-
-function ListItemLink(props: ListItemLinkProps) {
-    const { icon, primary, to } = props;
-
-    const renderLink = React.useMemo(
-        () =>
-            React.forwardRef<any, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => (
-                <RouterLink to={to} ref={ref} {...itemProps} />
-            )),
-        [to],
-    );
-
-    return (
-        <li>
-            <ListItem button component={renderLink}>
-                {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
-                <ListItemText primary={primary} />
-            </ListItem>
-        </li>
-    );
-}
 
 const Index: React.FC = () => {
     const classes = useStyles();
@@ -72,7 +38,7 @@ const Index: React.FC = () => {
         <div>
             <Container className={classes.content}>
                 <Catename />
-                <Grid container spacing={0}>
+                <Grid container spacing={3}>
                     <Grid item xs={12} md={9}>
                         <Articles />
                     </Grid>
