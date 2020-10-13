@@ -34,7 +34,7 @@ class ReactsController < ApplicationController
     if !params[:id] then
       @data = Article.where(disclosureRange_id: disclosureRanges)
                       .where(group_id: groups)
-                      .where(disclosureRange_id: DisclosureRangeList::PUBLIC)
+                      .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC))
                       .order('created_at desc')                    
     else
       @is_category = params[:id]
@@ -42,7 +42,7 @@ class ReactsController < ApplicationController
       @data = Article.where(disclosureRange_id: disclosureRanges)
                     .where(group_id: groups)
                     .where('category_id = ?', params[:id])
-                    .where(disclosureRange_id: DisclosureRangeList::PUBLIC)
+                    .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC))
                     .order('created_at desc')                   
     end
     render plain:@data.to_json 

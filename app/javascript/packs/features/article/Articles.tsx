@@ -34,8 +34,8 @@ let getArticle = (val: any) => {
     );
   }
 
-  var str = "articles/show/" + val.id;
-  var date = new Date(val.created_at)
+  let str = "articles/show/" + val.id;
+  let date = new Date(val.created_at)
   return (
     < Grid item xs={8} md={4} component={Card} className={styles.article} key={val.id} >
       <CardActionArea >
@@ -68,7 +68,6 @@ let getArticle = (val: any) => {
 const Articles: React.FC = () => {
   const articles = useSelector(selectArticles);
   const page: number = useSelector(selectPage);
-
   const classes = useStyles();
   const [rowsPerPage] = React.useState(5);
   const dispatch = useDispatch();
@@ -94,7 +93,7 @@ const Articles: React.FC = () => {
         ? arr.slice(page * rowsPerPage - rowsPerPage, page * rowsPerPage)
         : arr
       ).map((article) => (
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={2} justify="center" key={article[0].id}>
           {getArticle(article[0])}
           {getArticle(article[1])}
         </Grid>

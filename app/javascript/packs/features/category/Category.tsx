@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Category: React.FC = () => {
   const classes = useStyles();
   const categories = useSelector(selectCategories);
@@ -57,6 +56,7 @@ const Category: React.FC = () => {
                 button
                 selected={selectedIndex === category.id}
                 onClick={(event) => chgCategory(event, category.id, String(category.id), category.name, dispatch)}
+                key={category.id}
               >
                 <FiberManualRecordIcon fontSize="inherit" />
                 <ListItemText primary={category.name} />

@@ -7,8 +7,7 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
 document.addEventListener('DOMContentLoaded', () => {
-  var target_dom = null;
-  target_dom = document.querySelector('#root');
+  let target_dom = document.querySelector('#root');
 
   const el = (
     <React.StrictMode>
