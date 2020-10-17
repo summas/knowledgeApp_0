@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ナレッジサイト</title>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
@@ -37,10 +38,10 @@
                     <% end %>
                 </ul>
                 <% if account_signed_in? %>
-                <div class="float-right text-white pt-2 pr-3" style="font-size:0.7em;">
+                <div class="float-lg-right float-sm-left text-white pt-2 pr-3" style="font-size:0.7em;">
                     ログインアカウント：<%= current_account.name %><br>
                     権限：<%= Auth::MATRIX[current_account.auth] %>
-                </div><br>
+                </div>
                 <% end %>
 
                 <ul class="navbar-nav">
