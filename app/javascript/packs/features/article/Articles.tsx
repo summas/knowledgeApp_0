@@ -1,6 +1,6 @@
 import React from 'react';
 import HOST from '../../appconf';
-import { Card, CardContent, Typography, Grid, CardActionArea, Link } from "@material-ui/core";
+import { Card, CardContent, CardMedia, Typography, Grid, CardActionArea, Link } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
@@ -14,8 +14,11 @@ const styles = require('./index.module')
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexShrink: 0,
-      marginLeft: theme.spacing(2.5),
+      maxWidth: 245,
+    },
+    media: {
+      height: 0,
+      paddingTop: '56.25%',
     },
     paginate: {
       '& > *': {
@@ -25,7 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-let getArticle = (val: any) => {
+let truncateTitle = (title: String, len: number) => {
+  return (title.length <= len ? title : (title.substr(0, len) + "..."));
+};
+
+let getArticle = (val: any, classes: any) => {
 
   if (val == null) {
     return (
@@ -39,16 +46,17 @@ let getArticle = (val: any) => {
   return (
     < Grid item xs={8} md={4} component={Card} className={styles.article} key={val.id} >
       <CardActionArea >
-        <CardContent >
-          <Link href={`${HOST}/${str}`} >
+        <Link href={`${HOST}/${str}`} >
+          <CardMedia
+            className={classes.media}
+            image={`${val.image.url}`}
+          />
+          <CardContent >
             <Grid container spacing={2} direction="row" justify="flex-end">
-              <Grid item>
-                <img src={`${val.image.url}`} width="150" height="120" />
-              </Grid>
               <Grid item xs container direction="column" spacing={0}>
                 <Grid item>
                   <Typography variant="subtitle1" color="textSecondary" >
-                    {val.title}
+                    {truncateTitle(val.title, 23)}
                   </Typography>
                 </Grid>
               </Grid>
@@ -58,8 +66,8 @@ let getArticle = (val: any) => {
                 <AccessTimeIcon fontSize="inherit" /> {date.toLocaleDateString()}
               </Typography>
             </div>
-          </Link>
-        </CardContent>
+          </CardContent>
+        </Link>
       </CardActionArea >
     </Grid >
   );
@@ -93,9 +101,9 @@ const Articles: React.FC = () => {
         ? arr.slice(page * rowsPerPage - rowsPerPage, page * rowsPerPage)
         : arr
       ).map((article) => (
-        <Grid container spacing={2} justify="center" key={article[0].id}>
-          {getArticle(article[0])}
-          {getArticle(article[1])}
+        <Grid container spacing={0} justify="center" key={article[0].id}>
+          {getArticle(article[0], classes)}
+          {getArticle(article[1], classes)}
         </Grid>
       ))}
 
