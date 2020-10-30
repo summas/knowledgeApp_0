@@ -8,10 +8,15 @@ Rails.application.routes.draw do
   }
 
   root 'reacts#index'
+
+  get 'reacts/group'
+  get 'reacts/group/:id', to: 'reacts#group'
+
   get 'reacts/article/:id', to: 'reacts#index'
   get 'reacts/index'
   get 'reacts/ajax'
   get 'reacts/ajax/:id', to: 'reacts#ajax'
+  get 'reacts/ajax/:id/:grp', to: 'reacts#ajax'
   get 'reacts/category'
 
   get 'group_edits/index'
