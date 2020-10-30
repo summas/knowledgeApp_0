@@ -27,6 +27,7 @@ class ArticleEditsController < ApplicationController
 
     if request.post? then
       @article = Article.create articles_params
+      @article.update(image_path: @article.image_url)
       redirect_to '/'
     end
   end
@@ -47,6 +48,7 @@ class ArticleEditsController < ApplicationController
     @categories_select = Category.where('del_flg = ?', DelFlg::USE)
     if request.patch? then
       @article.update articles_params
+      @article.update(image_path: @article.image_url)
       redirect_to '/'
     end
   end
