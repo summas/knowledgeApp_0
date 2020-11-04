@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'reacts/index'
   get 'reacts/ajax'
   get 'reacts/ajax/:id', to: 'reacts#ajax'
-  get 'reacts/ajax/:id/:grp', to: 'reacts#ajax'
+  get 'reacts/ajax/:id/:group_id', to: 'reacts#ajax'
   get 'reacts/category'
 
   get 'group_edits/index'
