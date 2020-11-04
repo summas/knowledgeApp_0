@@ -9,19 +9,33 @@ type ARTICLE = typeof article;
 
 type articleState = {
     article: ARTICLE;
-    category_id: String
+    categoryId: String;
+    groupId: String;
 };
 
 const initialState: articleState = {
     article: article,
-    category_id: "",
+    categoryId: "",
+    groupId: "",
+};
+
+export let exportState: articleState = {
+    article: article,
+    categoryId: "",
+    groupId: "",
 };
 
 export const fetchAsyncGetArticles = createAsyncThunk(
     "article/getArticle",
-    async (category_id: String) => {
-        const { data } = await axios.get<ARTICLE>(`${HOST}/${apiUrl}/${category_id}`);
-        return { data: data, category_id: category_id };
+    async ({categoryId, groupId} : {categoryId: String, groupId: String}) => {
+        exportState.categoryId = categoryId;
+        exportState.groupId = groupId;
+        //パスにカテゴリIDを設定
+        let addpath = (categoryId !== "") ? ("/" + categoryId): "";
+        //パスにグループIDを設定
+        addpath = ((addpath !== "") && (groupId !== "")) ? (addpath + "/" + groupId): addpath;
+        const { data } = await axios.get<ARTICLE>(`${HOST}/${apiUrl}${addpath}`);
+        return { data: data, categoryId: categoryId , groupId: groupId };
     }
 );
 
