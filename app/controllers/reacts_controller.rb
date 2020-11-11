@@ -31,30 +31,27 @@ class ReactsController < ApplicationController
       session[:account_groups] = groups
     else
       groups = params[:group_id] 
-      puts groups
-        groups = Group.all.pluck("id") if !params[:group_id]
-     puts groups
-     puts !params[:group_id]
+      groups = Group.all.pluck("id") if !params[:group_id]
     end
  
     if !params[:id] then
-      puts "中野中"
-      @data = Article.where(disclosureRange_id: disclosureRanges)
+      @data =  Article.where(disclosureRange_id: disclosureRanges)
                       .where(group_id: groups)
                       .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC)) # ログインアカウントに所属しないグループの外部公開の記事は表示させる（編集は不可）
-                      .order('created_at desc')                    
+                      .order('created_at desc')
+                      .with_rich_text_content
     else
       if (params[:id] == "0") then
-        puts "外野外1"
         @data = Article.where(disclosureRange_id: disclosureRanges)
                         .where(group_id: groups)
                         .order('created_at desc') 
+                        .with_rich_text_content
       else 
-        puts "外野外2"
         @data = Article.where(disclosureRange_id: disclosureRanges)
                         .where(group_id: groups)
                         .where(category_id: params[:id])
-                        .order('created_at desc') 
+                        .order('created_at desc')
+                        .with_rich_text_content
       end               
     end
     render plain:@data.to_json 
