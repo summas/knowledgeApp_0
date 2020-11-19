@@ -34,6 +34,7 @@ module KnowledgeApp
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.hosts << '.example.com'
     config.hosts << 'knwldg.xyz'
     config.hosts << 'localhost'
   end
