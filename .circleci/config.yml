@@ -21,3 +21,10 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - name: Execute check
+        shell: bash
+        run: |
+          bundle exec rubocop
+          bundle exec rake db:setup
+          yarn
+          bundle exec rspec
