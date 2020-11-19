@@ -14,7 +14,7 @@ RSpec.describe Article, type: :model do
 
 		article = Article.new(
 				id: nil,
-				title: 'tester@example.com',
+				title: 'test title',
 				content:"password",
 				category_id: 1000,
 				group_id: 1000,

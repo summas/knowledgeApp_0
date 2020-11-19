@@ -35,14 +35,14 @@ RSpec.describe Account, type: :model do
                organization: nil
                )
                account.valid?
-               expect(account.errors[:email]).to include("can't be blank")
+               expect(account.errors[:email]).to include("を入力してください")
      end
      
      #重複したメールアドレスなら無効な状態であること
      it "is invalid with a duplicate emailaddress" do
           account = Account.create(
                id: nil,
-               email: 'tester@example.com',
+               email: 'test@example1.com',
                password:"password",
                created_at: nil,
                updated_at: nil,
@@ -53,7 +53,7 @@ RSpec.describe Account, type: :model do
 
           account = Account.new(
                id: nil,
-               email: 'tester@example.com',
+               email: 'test@example1.com',
                password:"password",
                created_at: nil,
                updated_at: nil,
@@ -62,6 +62,6 @@ RSpec.describe Account, type: :model do
                organization: nil
                )
                account.valid?
-               expect(account.errors[:email]).to include("has already been taken")
+               expect(account.errors[:email]).to include("はすでに存在します")
      end
 end
