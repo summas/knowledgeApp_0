@@ -1,57 +1,44 @@
 version: 2
 jobs:
-  build:
+  rspec:
     docker:
-      - image: circleci/ruby:2.6.3
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
+        environment:
+          RAILS_ENV: test
+          MYSQL_HOST: 127.0.0.1
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: 'msuser'
+          MYSQL_ROOT_PASSWORD: 'passwd'
     working_directory: ~/repo
     steps:
       - checkout
-      - run:
-          name: bundle update
-          command: gem install bundler:1.17.2
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run:
-          name: install dependencies 
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - restore_cache:
-          name: Yarn パッケージのキャッシュの復元
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      # Rspec
       - run:
-          name: Setup NodeJS and Yarn
-          command: |
-            # Install NVM
-            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-            source $BASH_ENV
+          name: Rspec
+          command: bundle exec rspec
 
-            # Install NodeJS
-            nvm install v14.5.0
-            nvm alias default v14.5.0
-
-            # Install Yarn
-            npm install -g yarn@1.22.4
-            yarn install --frozen-lockfile
-            yarn install --check-files
-      - save_cache:
-          name: Yarn パッケージのキャッシュの保存
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - run:
-          name: Execute check
-          command: |
-            #bundle exec rubocop
-            bundle exec rspec
+workflows:
+  version: 2
+  rubocop_rails:
+    jobs:
+    #  - rubocop
+      - rspec:
+     #     requires:
+     #       - rubocop
             #curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --1.22.4
             #yarn install --check-files
             #bundle exec rake db:setup
