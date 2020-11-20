@@ -25,6 +25,6 @@ jobs:
           name: Execute check
           command: |
             #bundle exec rubocop
-            bundle exec rake db:setup
             yarn install --check-files
+            bundle exec rake db:setup
             bundle exec rspec
