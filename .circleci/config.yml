@@ -24,6 +24,6 @@ jobs:
       - run:
           name: Execute check
           command: |
-            bundle exec rubocop
+            #bundle exec rubocop
             bundle exec rake db:setup
             bundle exec rspec
