@@ -31,12 +31,12 @@ jobs:
           name: Rspec
           command: bundle exec rspec
 
-workflows:
-  version: 2
-  rubocop_rails:
-    jobs:
+# workflows:
+ #  version: 2
+#   rubocop_rails:
+  #   jobs:
     #  - rubocop
-      - rspec:
+    #   - rspec:
      #     requires:
      #       - rubocop
             #curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --1.22.4
