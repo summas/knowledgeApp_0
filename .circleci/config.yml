@@ -26,8 +26,22 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: 依存関係のインストール
-          command: yarn install --frozen-lockfile
+          name: Setup NodeJS and Yarn
+          command: |
+            # Install NVM
+            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+            source $BASH_ENV
+
+            # Install NodeJS
+            nvm install v14.5.0
+            nvm alias default v14.5.0
+
+            # Install Yarn
+            npm install -g yarn@1.22.4
+            yarn install --frozen-lockfile
+            yarn install --check-files
       - save_cache:
           name: Yarn パッケージのキャッシュの保存
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -38,7 +52,7 @@ jobs:
           command: |
             #bundle exec rubocop
             bundle exec rspec
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --1.22.4
-            yarn install --check-files
+            #curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --1.22.4
+            #yarn install --check-files
             #bundle exec rake db:setup
             #bundle exec rspec
