@@ -21,6 +21,12 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          paths:
+            - ./node_modules
+          keys:
+            - v2-dependencies-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            - v2-dependencies-
       - run:
           name: Execute check
           command: |
