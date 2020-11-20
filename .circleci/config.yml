@@ -10,6 +10,7 @@ jobs:
           DB_PASSWORD: 'passwd'
       - image: circleci/mysql:5.7
         environment:
+          MYSQL_DATABASE: 'knowledgeApp_test'
           MYSQL_USER: 'msuser'
           MYSQL_ROOT_PASSWORD: 'passwd'
     working_directory: ~/repo
