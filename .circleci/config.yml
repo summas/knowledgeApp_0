@@ -6,8 +6,8 @@ jobs:
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
-          DB_USERNAME: 'msuser'
-          DB_PASSWORD: 'passwd'
+          MYSQL_USER: 'msuser'
+          MYSQL_ROOT_PASSWORD: 'passwd'
       - image: circleci/mysql:5.7
         environment:
           MYSQL_DATABASE: 'knowledgeApp_test'
