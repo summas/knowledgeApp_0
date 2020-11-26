@@ -23,6 +23,9 @@
 - Bootstrap 4
 - Material-UI
 
+#### その他
+- CircleCI
+
 #### AWS
 - VPC
 - RDS(Mysql 5.7.26)
