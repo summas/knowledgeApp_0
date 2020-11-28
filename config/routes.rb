@@ -47,7 +47,6 @@ Rails.application.routes.draw do
   get 'articles/show/:id', to: 'articles#show'
   get 'articles/group'
   get 'articles/react'
-  get 'articles/ajax'
 
   get 'article_edits/index'
   get 'article_edits/add'
