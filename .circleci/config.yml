@@ -30,6 +30,10 @@ jobs:
       - run: bundle exec rake db:create --trace
       - run: bundle exec rake db:schema:load
       - run: bundle exec rake db:seed
+      # Rubocop
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
       # Rspec
       - run:
           name: Rspec
