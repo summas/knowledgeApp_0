@@ -33,8 +33,6 @@ class ArticlesController < ApplicationController
 		@article = Article.find params[:id]
   end
 
-  def react; end
-
   private
   def articles_params
     params.require(:article).permit(:title, :subtitle, :content, :category_id)

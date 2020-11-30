@@ -1,9 +1,9 @@
 class ReactsController < ApplicationController
   layout 'article'
 
-  def index; end
+  # def index; end
 
-  def show; end
+  # def show; end
 
   def article
     @article = Article.find params[:id]

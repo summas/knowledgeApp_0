@@ -9,9 +9,30 @@ class ArticleEditsController < ApplicationController
                   .order('created_at desc')
                   .page(params[:page])
                   .per(15)
+                 # .includes(:accounts, :groups, :categories,:disclosure_ranges)
   end
 
-  def add
+  def new
+    @util = Util.new
+    @article = Article.new
+    if current_account.auth == Auth::ADMIN then
+      @disclosureRanges = DisclosureRange.all
+      @groups = Group.where('del_flg = ?', DelFlg::USE)
+    else
+      @disclosureRanges = DisclosureRange.where.not('id = ?', DisclosureRangeList::ADMIN)
+      @groups = Group.where(id: GroupRelation.where(account_id:current_account.id)
+                    .pluck("group_id"))
+                    .where('del_flg = ?', DelFlg::USE)
+    end
+    @categories_select = Category.where('del_flg = ?', DelFlg::USE)
+
+    if request.post? then
+      @article = Article.create articles_params
+      redirect_to '/'
+    end
+  end
+
+  def create
     @util = Util.new
     @article = Article.new
     if current_account.auth == Auth::ADMIN then
@@ -51,7 +72,7 @@ class ArticleEditsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @article = Article.find params[:id]
     if request.post? then
       @article.destroy

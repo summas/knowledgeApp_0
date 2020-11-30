@@ -17,7 +17,7 @@
         <td><%= @article.content %></td>
     </tr>
 </table>
-<%= form_tag controller: "article_edits", action: "delete" do %>
+<%= form_tag controller: "article_edits", action: "destroy" do %>
 <%= hidden_field_tag "id", {value: @article.id} %>
 <hr>
 <div class="text-center pb-3 pt-1">
@@ -25,4 +25,4 @@
 </div>
 
 <% end %>
-<p><a href="/article_edits/index/">投稿記事一覧</a></p>
+<p><a href="/article_edits/">投稿記事一覧</a></p>
