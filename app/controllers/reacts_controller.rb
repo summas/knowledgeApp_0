@@ -1,78 +1,52 @@
 class ReactsController < ApplicationController
   layout 'article'
 
-  def index
-  end
+  # def index; end
 
-  def show
-  end
+  # def show; end
 
   def article
-     @article = Article.find params[:id]        
+    @article = Article.find params[:id]
     # @article = Article.select(:content).where(id: params[:id])
-    content = {params[:id] => @article.content.to_s}
+    content = { params[:id] => @article.content.to_s }
     # @content["content"] = @article.content.to_s
-    render plain:content.to_json
+    render plain: content.to_json
   end
 
   def ajax
-    disclosureRanges = 1
     @is_category = false
-    if account_signed_in? then
-        groups = params[:group_id] if params[:group_id]
-      if current_account.auth == Auth::ADMIN then
-        disclosureRanges = DisclosureRange.pluck("id")
-        groups = Group.all.pluck("id")  if !params[:group_id]
-      else
-        disclosureRanges = DisclosureRange.where.not('id = ?', DisclosureRangeList::ADMIN).pluck("id")
-        groups = GroupRelation.where(account_id:current_account.id)
-                              .pluck("group_id")  if !params[:group_id]
-      end
-      session[:account_groups] = groups
-    else
-      groups = params[:group_id] 
-      groups = Group.all.pluck("id") if !params[:group_id]
-    end
- 
-    if !params[:id] then
-      @data =  Article.where(disclosureRange_id: disclosureRanges)
-                      .where(group_id: groups)
-                      .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC)) # ログインアカウントに所属しないグループの外部公開の記事は表示させる（編集は不可）
-                      .order('created_at desc')
-                      .with_rich_text_content
-    else
-      if (params[:id] == "0") then
-        @data = Article.where(disclosureRange_id: disclosureRanges)
-                        .where(group_id: groups)
-                        .order('created_at desc') 
-                        .with_rich_text_content
-      else 
-        @data = Article.where(disclosureRange_id: disclosureRanges)
-                        .where(group_id: groups)
-                        .where(category_id: params[:id])
-                        .order('created_at desc')
-                        .with_rich_text_content
-      end               
-    end
-    render plain:@data.to_json 
+    re_obj = get_disclosure_ranges_groups(params[:group_id])
+
+    disclosure_ranges = re_obj[0]
+    groups = re_obj[1]
+    session[:account_groups] = groups
+
+    @data = if !params[:id]
+              article_no_category(disclosure_ranges, groups)
+            elsif params[:id] == '0'
+              article_category_0(disclosure_ranges, groups)
+            else
+              article_with_category(disclosure_ranges, groups, params[:id])
+            end
+    render plain: @data.to_json
   end
 
   def category
     @category = Category.all.order(:del_flg)
-    render plain:@category.to_json 
+    render plain: @category.to_json
   end
 
   def group
-    if account_signed_in? then
-      if current_account.auth == Auth::ADMIN then
-        groups = Group.all
-      else
-        groups = Group.where(id:GroupRelation.where(account_id:current_account.id)
-                              .pluck("group_id"))
-      end
-    else
-     groups = Group.all
-    end
-    render plain:groups.to_json 
+    groups = if account_signed_in?
+               if current_account.auth == Auth::ADMIN
+                 Group.all
+               else
+                 Group.where(id: GroupRelation.where(account_id: current_account.id)
+                                       .pluck('group_id'))
+               end
+             else
+               Group.all
+             end
+    render plain: groups.to_json
   end
 end

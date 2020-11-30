@@ -4,23 +4,15 @@ class ArticlesController < ApplicationController
   before_action :authenticate_account!, only:[:add,:edit,:delete,:edit]
 
   def index
-    disclosureRanges = 1
     @is_category = false
-    if account_signed_in? then
-      if current_account.auth == Auth::ADMIN then
-        disclosureRanges = DisclosureRange.pluck("id")
-        groups = Group.all.pluck("id") 
-      else
-        disclosureRanges = DisclosureRange.where.not('id = ?', DisclosureRangeList::ADMIN).pluck("id")
-        groups = GroupRelation.where(account_id:current_account.id)
-                              .pluck("group_id")
-      end
-      session[:account_groups] = groups
-    else
-      groups = Group.all.pluck("id") 
-    end
+    re_obj = get_disclosure_ranges_groups(params[:group_id])
+
+    disclosure_ranges = re_obj[0]
+    groups = re_obj[1]
+    session[:account_groups] = groups
+
     if !params[:id] then
-      @data = Article.where(disclosureRange_id: disclosureRanges)
+      @data = Article.where(disclosureRange_id: disclosure_ranges)
                      .where(group_id: groups)
                      .where(disclosureRange_id: DisclosureRangeList::PUBLIC)
                      .order('created_at desc')
@@ -28,7 +20,7 @@ class ArticlesController < ApplicationController
     else
       @is_category = params[:id]
       @category_name = params[:name]
-      @data = Article.where(disclosureRange_id: disclosureRanges)
+      @data = Article.where(disclosureRange_id: disclosure_ranges)
                     .where(group_id: groups)
                     .where('category_id = ?', params[:id])
                     .where(disclosureRange_id: DisclosureRangeList::PUBLIC)
@@ -39,41 +31,6 @@ class ArticlesController < ApplicationController
 
   def show
 		@article = Article.find params[:id]
-  end
-
-  def react; end
-
-  def ajax
-    disclosureRanges = 1
-    @is_category = false
-    if account_signed_in? then
-      if current_account.auth == Auth::ADMIN then
-        disclosureRanges = DisclosureRange.pluck("id")
-        groups = Group.all.pluck("id") 
-      else
-        disclosureRanges = DisclosureRange.where.not('id = ?', DisclosureRangeList::ADMIN).pluck("id")
-        groups = GroupRelation.where(account_id:current_account.id)
-                              .pluck("group_id")
-      end
-      session[:account_groups] = groups
-    else
-      groups = Group.all.pluck("id") 
-    end
-    if !params[:id] then
-      @data = Article.where(disclosureRange_id: disclosureRanges)
-                     .where(group_id: groups)
-                     .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC))
-                     .order('created_at desc')                    
-    else
-      @is_category = params[:id]
-      @category_name = params[:name]
-      @data = Article.where(disclosureRange_id: disclosureRanges)
-                    .where(group_id: groups)
-                    .where('category_id = ?', params[:id])
-                    .or(Article.where(disclosureRange_id: DisclosureRangeList::PUBLIC))
-                    .order('created_at desc')                   
-    end
-    render plain:@data.to_json 
   end
 
   private

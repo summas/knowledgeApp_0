@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'reacts/group'
   get 'reacts/group/:id', to: 'reacts#group'
-
+ 
   get 'reacts/article/:id', to: 'reacts#index'
   get 'reacts/index'
   get 'reacts/ajax'
@@ -37,28 +37,20 @@ Rails.application.routes.draw do
   patch 'admins/edit/:id', to: 'admins#edit'
   get 'admins/delete'
   delete 'admins/delete/:id', to: 'admins#delete'
-
+ 
   get 'articles', to: 'articles#index'
   get 'articles/index'
   get 'articles/index/:id/:name', to: 'articles#index'
-  get 'articles/category'
-  get 'articles/category/:id', to: 'articles#category'
   get 'articles/show'
   get 'articles/show/:id', to: 'articles#show'
-  get 'articles/group'
-  get 'articles/react'
-  get 'articles/ajax'
 
-  get 'article_edits/index'
-  get 'article_edits/add'
-  post 'article_edits/add'
+  resources :article_edits, only: [:index, :new, :create]
   get 'article_edits/edit'
   get 'article_edits/:id', to: 'article_edits#edit'
   patch 'article_edits/:id', to: 'article_edits#edit'
-  get 'article_edits/delete'
-  get 'article_edits/delete/:id', to: 'article_edits#delete'
-  post 'article_edits/delete/:id', to: 'article_edits#delete'
-  get 'article_edits/category/:id', to: 'article_edits#category'
+  get 'article_edits/destroy'
+  get 'article_edits/destroy/:id', to: 'article_edits#destroy'
+  post 'article_edits/destroy/:id', to: 'article_edits#destroy'
 
   get 'categories/index'
   get 'categories', to: 'categories#index'
