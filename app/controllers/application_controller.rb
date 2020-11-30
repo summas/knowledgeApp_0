@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
                .with_rich_text_content
       end
 
-      def article_category_0(disclosure_ranges, groups)
+      def article_category_zero(disclosure_ranges, groups)
         Article.where(disclosureRange_id: disclosure_ranges)
                .where(group_id: groups)
                .order('created_at desc')

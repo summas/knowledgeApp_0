@@ -37,6 +37,9 @@ Style/HashTransformValues:
 Style/ExponentialNotation:
   Enabled: true
 
+Style/RedundantFileExtensionInRequire:
+  Enabled: false 
+
 # 1行の文字数
 Layout/LineLength:
   Exclude:
@@ -57,3 +60,15 @@ Metrics/BlockLength:
 
 Lint/SuppressedException:
   Enabled: false
+
+Lint/UselessMethodDefinition:
+    Exclude:
+    - 'app/controllers/accounts/registrations_controller.rb'
+
+Style/GlobalStdStream:
+    Exclude:
+    - 'config/environments/production.rb'
+
+Style/RedundantFetchBlock:
+    Exclude:
+    - 'config/puma.rb'

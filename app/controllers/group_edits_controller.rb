@@ -14,14 +14,14 @@ class GroupEditsController < ApplicationController
   def add
     if request.post? then
       @groupRelation = GroupRelation.create group_params
-      redirect_to '/admins/groupEdit/' + params[:group_relation][:account_id]
+      redirect_to "/admins/groupEdit/#{params[:group_relation][:account_id]}"
     end
   end
 
   def delete
     @groupRelation = GroupRelation.find params[:g_reration_id]
     @groupRelation.destroy
-    redirect_to '/admins/groupEdit/' + params[:account_id]
+    redirect_to "/admins/groupEdit/#{params[:account_id]}"
   end
 
   private
