@@ -8,6 +8,7 @@ AllCops:
     - 'lib/**'
     - 'db/**/*'
     - 'node_modules/**/*'
+    - 'vendor/**/*'
 
 # 日本語でのコメントを許可
 Style/AsciiComments:
