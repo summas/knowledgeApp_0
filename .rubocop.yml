@@ -1,0 +1,75 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.6.3
+  Exclude:
+    - 'config.ru'
+    - 'bin/**'
+    - 'lib/**'
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+
+# 日本語でのコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+# クラスのコメント必須を無視
+Style/Documentation:
+  Enabled: false
+
+#文字列をfreezeするか
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 名前空間を分ける時、ネストしない書き方を許可
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: false 
+
+# 1行の文字数
+Layout/LineLength:
+  Exclude:
+    - "db/migrate/*.rb"
+
+Layout/SpaceAroundMethodCallOperator:
+    Enabled: true
+
+Lint/RaiseException:
+    Enabled: true
+
+Lint/StructNewOverride:
+    Enabled: true
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+
+Lint/SuppressedException:
+  Enabled: false
+
+Lint/UselessMethodDefinition:
+    Exclude:
+    - 'app/controllers/accounts/registrations_controller.rb'
+
+Style/GlobalStdStream:
+    Exclude:
+    - 'config/environments/production.rb'
+
+Style/RedundantFetchBlock:
+    Exclude:
+    - 'config/puma.rb'

@@ -33,9 +33,9 @@ yarn-debug.log*
 .Dockerfile.swp
 docker-compose.yml
 Dockerfile
-.rubocop*
+# .rubocop*
 knwldg.code-workspace
-.rubocop_todo.yml
+# .rubocop_todo.yml
 
 /public/uploads/*
 containers/.DS_Store

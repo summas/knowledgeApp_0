@@ -24,7 +24,7 @@ class ReactsController < ApplicationController
     @data = if !params[:id]
               article_no_category(disclosure_ranges, groups)
             elsif params[:id] == '0'
-              article_category_0(disclosure_ranges, groups)
+              article_category_zero(disclosure_ranges, groups)
             else
               article_with_category(disclosure_ranges, groups, params[:id])
             end

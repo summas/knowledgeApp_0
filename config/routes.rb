@@ -30,8 +30,6 @@ Rails.application.routes.draw do
   get 'admins/add'
   post 'admins/add'
   get 'admins/edit'
-  get 'admins/group_add'
-  post 'admins/group_add'
   get 'admins/groupEdit/:id', to: 'admins#group_edit'
   get 'admins/edit/:id', to: 'admins#edit'
   patch 'admins/edit/:id', to: 'admins#edit'

@@ -60,6 +60,8 @@ gem 'devise'
 
 gem 'rubocop'
 
+gem 'rubocop-performance'
+
 gem 'kaminari'
 
 gem 'carrierwave'

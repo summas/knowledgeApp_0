@@ -48,15 +48,6 @@ class AdminsController < ApplicationController
     @groupRelationAdd = GroupRelation.new
   end
 
-  def group_add
-    puts params
-    @groupRelation = GroupRelation.new
-    if request.post? then
-      @groupRelation = GroupRelation.create group_params
-      redirect_to '/admins/groupEdit/3' #+ params[:id]
-    end
-  end
-
   private
   def account_params
     params.require(:account).permit(:name, :auth, :organization, :email, :password)
