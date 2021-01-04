@@ -75,3 +75,5 @@ gem 'devise-i18n-views'
 gem 'react_on_rails'
 
 gem 'fog-aws'
+
+gem 'rack-cors'
