@@ -64,4 +64,7 @@ RSpec.configure do |config|
 
   require 'capybara/rspec'
   config.include FactoryBot::Syntax::Methods
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
 end
