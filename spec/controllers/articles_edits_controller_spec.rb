@@ -14,4 +14,20 @@ RSpec.describe ArticleEditsController, type: :controller do
       expect(response).to have_http_status '200'
     end
   end
+
+  describe 'GET /new' do
+    it 'returns http success as an authorized user' do
+      @user = FactoryBot.create(:account)
+      sign_in @user
+      get :new
+      expect(response).to have_http_status '200'
+    end
+
+    it 'post' do
+      @user = FactoryBot.create(:account)
+      sign_in @user
+      get :new
+      expect(response).to have_http_status '200'
+    end
+  end
 end
