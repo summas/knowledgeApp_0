@@ -80,13 +80,6 @@ class ArticleEditsController < ApplicationController
     end
   end
 
-  def category
-    @category = Category.find params[:id]
-    @data = Article.where('category_id = ?', params[:id])
-    .order('created_at desc')
-    .page params[:page]
-  end
-
   private
   def articles_params
     params.require(:article).permit(:title, :content, :category_id, :group_id, :account_id, :disclosureRange_id, :image)

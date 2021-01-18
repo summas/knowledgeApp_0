@@ -5,7 +5,7 @@ RSpec.describe TestsessionsController, type: :controller do
     # FactoryBot.create(:account)
     it 'returns http success' do
       post :create
-      expect(response).to redirect_to '/'
+      expect(response).to redirect_to root_path
     end
   end
 end
