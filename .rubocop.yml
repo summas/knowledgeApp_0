@@ -58,6 +58,7 @@ Lint/StructNewOverride:
 Metrics/BlockLength:
   Exclude:
     - 'config/routes.rb'
+    - 'spec/controllers/*_spec.rb'
 
 Lint/SuppressedException:
   Enabled: false

@@ -11,9 +11,7 @@ RSpec.describe ArticlesController, type: :controller do
   describe 'GET /show' do
     it 'returns http success' do
       FactoryBot.create(:category)
-
       FactoryBot.create(:disclosureRange)
-
       FactoryBot.create(:group)
       FactoryBot.create(:article)
       get :show, params: { id: 1000 }

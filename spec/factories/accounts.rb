@@ -4,5 +4,6 @@ FactoryBot.define do
     name {"テスト　太郎"}
     email {"test@example1.com"}
     password {"qwerty"}
+    auth {3}
   end
 end
