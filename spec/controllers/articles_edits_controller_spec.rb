@@ -46,16 +46,6 @@ RSpec.describe ArticleEditsController, type: :controller do
     end
   end
 
-  describe 'post /edit' do
-    it 'patch' do
-      @article = FactoryBot.create(:article)
-      articles_params = FactoryBot.attributes_for(:article)
-      sign_in @account
-      patch :edit, params: { article: articles_params, id: @article.id }
-      expect(response).to redirect_to root_path
-    end
-  end
-
   describe 'patch /edit' do
     it 'patch' do
       @article = FactoryBot.create(:article)
@@ -67,11 +57,11 @@ RSpec.describe ArticleEditsController, type: :controller do
   end
 
   describe 'post / destroy' do
-    it 'patch' do
+    it 'destroy' do
       @article = FactoryBot.create(:article)
       articles_params = FactoryBot.attributes_for(:article)
       sign_in @account
-      patch :edit, params: { article: articles_params, id: @article.id }
+      post :destroy, params: { article: articles_params, id: @article.id }
       expect(response).to redirect_to root_path
     end
   end
